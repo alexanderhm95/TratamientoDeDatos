@@ -7,7 +7,19 @@ def test_health_check():
     assert data['status'] == 'ok' # Verifica que el estado en la respuesta sea 'ok'
     assert data['message'] == 'API is healthy' # Verifica que el mensaje en la respuesta sea 'API is healthy'
 
-
+def test_create_user():
+    user_data = {
+        'username': 'testuser',
+        'email': 'testuser@example.com',
+        'password': 'testpassword',
+        'role': 'user'
+    }
+    response = requests.post('http://localhost:8000/api/users', json=user_data)
+    print(response.status_code) # Imprime el código de estado de la respuesta
+    assert response.status_code == 201 # Verifica que el código de estado sea 201 (Creado)
+    data = response.json() # Convierte la respuesta a formato JSON
+    assert data['username'] == user_data['username'] # Verifica que el nombre de usuario en la respuesta sea el mismo que el enviado
+    assert data['email'] == user_data['email'] # Verifica que el correo electrónico en la respuesta sea el mismo que el enviado
 
 def test_list_users():
     response = requests.get('http://localhost:8000/api/users') # Realiza una solicitud GET a la ruta de listado de usuarios
