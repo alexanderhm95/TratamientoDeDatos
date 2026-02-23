@@ -1,0 +1,344 @@
+[
+    {
+        "label": "jwt",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "jwt",
+        "description": "jwt",
+        "detail": "jwt",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Bcrypt",
+        "importPath": "flask_bcrypt",
+        "description": "flask_bcrypt",
+        "isExtraImport": true,
+        "detail": "flask_bcrypt",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "importPath": "time",
+        "description": "time",
+        "isExtraImport": true,
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "current_app",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "JWTManager",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "Config",
+        "importPath": "config",
+        "description": "config",
+        "isExtraImport": true,
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "importPath": "user.models",
+        "description": "user.models",
+        "isExtraImport": true,
+        "detail": "user.models",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "importPath": "user.models",
+        "description": "user.models",
+        "isExtraImport": true,
+        "detail": "user.models",
+        "documentation": {}
+    },
+    {
+        "label": "bcrypt",
+        "importPath": "user.models",
+        "description": "user.models",
+        "isExtraImport": true,
+        "detail": "user.models",
+        "documentation": {}
+    },
+    {
+        "label": "user_bp",
+        "importPath": "user.routes",
+        "description": "user.routes",
+        "isExtraImport": true,
+        "detail": "user.routes",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "kind": 6,
+        "importPath": "user.models",
+        "description": "user.models",
+        "peekOfCode": "class User(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(64), unique=True, nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n    password_hash = db.Column(db.String(128), nullable=False)\n    role = db.Column(db.String(20), default='user')  # Rol del usuario (e.g., 'user', 'admin')\n    is_active = db.Column(db.Boolean, default=True)  # Indica si el usuario está activo\n    created_at = db.Column(db.DateTime, default=datetime.utcnow)\n    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)\n    def __init__(self, username, email, password, role='user'):",
+        "detail": "user.models",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "kind": 5,
+        "importPath": "user.models",
+        "description": "user.models",
+        "peekOfCode": "db = SQLAlchemy()\n#Inicialización de Bcrypt para el manejo de contraseñas\nbcrypt = Bcrypt()\n\"\"\"\nModelo de Usuario para la aplicación Flask. Este modelo define la estructura de la tabla de usuarios en la base de datos y proporciona métodos para manejar la autenticación y generación de tokens JWT.\n\"\"\"\nclass User(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(64), unique=True, nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)",
+        "detail": "user.models",
+        "documentation": {}
+    },
+    {
+        "label": "bcrypt",
+        "kind": 5,
+        "importPath": "user.models",
+        "description": "user.models",
+        "peekOfCode": "bcrypt = Bcrypt()\n\"\"\"\nModelo de Usuario para la aplicación Flask. Este modelo define la estructura de la tabla de usuarios en la base de datos y proporciona métodos para manejar la autenticación y generación de tokens JWT.\n\"\"\"\nclass User(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(64), unique=True, nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n    password_hash = db.Column(db.String(128), nullable=False)\n    role = db.Column(db.String(20), default='user')  # Rol del usuario (e.g., 'user', 'admin')",
+        "detail": "user.models",
+        "documentation": {}
+    },
+    {
+        "label": "health_check",
+        "kind": 2,
+        "importPath": "user.routes",
+        "description": "user.routes",
+        "peekOfCode": "def health_check():\n    return jsonify({'status': 'ok', 'message': 'API is healthy'}) # Devuelve un mensaje indicando que la API está saludable\n\"\"\"\nRuta para crear un nuevo usuario. Esta ruta responde a solicitudes POST, recibe datos en formato JSON y utiliza la función create_user para agregar un nuevo usuario a la base de datos.\n\"\"\"\n@user_bp.route('/api/users', methods=['POST']) # Define una ruta para crear un nuevo usuario\ndef create_user_route():\n    data = request.get_json() # Obtiene los datos enviados en formato JSON\n    username = data.get('username') # Extrae el nombre de usuario del JSON\n    email = data.get('email') # Extrae el correo electrónico del JSON",
+        "detail": "user.routes",
+        "documentation": {}
+    },
+    {
+        "label": "create_user_route",
+        "kind": 2,
+        "importPath": "user.routes",
+        "description": "user.routes",
+        "peekOfCode": "def create_user_route():\n    data = request.get_json() # Obtiene los datos enviados en formato JSON\n    username = data.get('username') # Extrae el nombre de usuario del JSON\n    email = data.get('email') # Extrae el correo electrónico del JSON\n    password = data.get('password') # Extrae la contraseña del JSON\n    role = data.get('role', 'user') # Extrae el rol del usuario del JSON, por defecto es 'user'\n    user = create_user(username, email, password, role) # Llama a la función create_user para crear un nuevo usuario en la base de datos\n    return jsonify(user.to_dict()), 201 # Devuelve la información del nuevo usuario en formato JSON con un código de estado 201 (Creado)\n\"\"\"\nRuta para listar todos los usuarios. Esta ruta responde a solicitudes GET y devuelve una lista de todos los usuarios en la base de datos en formato JSON.",
+        "detail": "user.routes",
+        "documentation": {}
+    },
+    {
+        "label": "list_users_route",
+        "kind": 2,
+        "importPath": "user.routes",
+        "description": "user.routes",
+        "peekOfCode": "def list_users_route():\n    users = list_users() # Llama a la función list_users para obtener una lista de todos los usuarios en la base de datos\n    return jsonify([user.to_dict() for user in users]) # Devuelve la lista de usuarios en formato JSON\n\"\"\"\nRuta para iniciar sesión. Esta ruta responde a solicitudes POST, recibe datos en formato JSON y utiliza la función login_user para verificar las credenciales del usuario y devolver un token JWT si son correctas.\n\"\"\"\n@user_bp.route('/api/login', methods=['POST']) # Define una ruta para iniciar sesión\ndef login_user_route():\n    data = request.get_json() # Obtiene los datos enviados en formato JSON\n    username = data.get('username') # Extrae el nombre de usuario del JSON",
+        "detail": "user.routes",
+        "documentation": {}
+    },
+    {
+        "label": "login_user_route",
+        "kind": 2,
+        "importPath": "user.routes",
+        "description": "user.routes",
+        "peekOfCode": "def login_user_route():\n    data = request.get_json() # Obtiene los datos enviados en formato JSON\n    username = data.get('username') # Extrae el nombre de usuario del JSON\n    password = data.get('password') # Extrae la contraseña del JSON\n    user = login_user(username, password) # Llama a la función login_user para verificar las credenciales del usuario\n    if user:\n        token = user.generate_jwt() # Genera un token JWT para el usuario autenticado\n        return jsonify({'token': token}) # Devuelve el token JWT en formato JSON\n    else:\n        return jsonify({'message': 'Invalid credentials'}), 401 # Devuelve un mensaje de error con un código de estado 401 (No autorizado) si las credenciales son inválidas",
+        "detail": "user.routes",
+        "documentation": {}
+    },
+    {
+        "label": "user_bp",
+        "kind": 5,
+        "importPath": "user.routes",
+        "description": "user.routes",
+        "peekOfCode": "user_bp = Blueprint('user', __name__)\n\"\"\"\nRuta para verificar el estado de la API. Esta ruta responde a solicitudes GET y devuelve un mensaje indicando que la API está saludable.\n\"\"\"\n@user_bp.route('/api/health', methods=['GET']) # Define una ruta para verificar el estado de la API\ndef health_check():\n    return jsonify({'status': 'ok', 'message': 'API is healthy'}) # Devuelve un mensaje indicando que la API está saludable\n\"\"\"\nRuta para crear un nuevo usuario. Esta ruta responde a solicitudes POST, recibe datos en formato JSON y utiliza la función create_user para agregar un nuevo usuario a la base de datos.\n\"\"\"",
+        "detail": "user.routes",
+        "documentation": {}
+    },
+    {
+        "label": "list_users",
+        "kind": 2,
+        "importPath": "user.service",
+        "description": "user.service",
+        "peekOfCode": "def list_users():\n    \"\"\"Devuelve una lista de todos los usuarios en la base de datos.\"\"\"\n    try:\n        if User.query.count() == 0:\n            raise ValueError('No hay usuarios registrados.')\n        return User.query.all()\n    except Exception as e:\n        raise e\ndef login_user(username, password):\n    \"\"\"Verifica las credenciales del usuario y devuelve el usuario si son correctas.\"\"\"",
+        "detail": "user.service",
+        "documentation": {}
+    },
+    {
+        "label": "login_user",
+        "kind": 2,
+        "importPath": "user.service",
+        "description": "user.service",
+        "peekOfCode": "def login_user(username, password):\n    \"\"\"Verifica las credenciales del usuario y devuelve el usuario si son correctas.\"\"\"\n    try:\n        user = User.query.filter_by(username=username).first()\n        if user and user.check_password(password):\n            return user\n        else:\n            raise ValueError('Credenciales inválidas.')\n    except Exception as e:\n        raise e",
+        "detail": "user.service",
+        "documentation": {}
+    },
+    {
+        "label": "create_user",
+        "kind": 2,
+        "importPath": "user.service",
+        "description": "user.service",
+        "peekOfCode": "def create_user(username, email, password, role='user'):\n    \"\"\"Crea un nuevo usuario en la base de datos.\"\"\"\n    try:\n        if User.query.filter_by(username=username).first():\n            raise ValueError('El nombre de usuario ya existe.')\n        if User.query.filter_by(email=email).first():\n            raise ValueError('El correo electrónico ya está registrado.')\n        # Verificacion de email\n        if email.count('@') != 1 or email.rfind('.') < email.find('@'):\n            raise ValueError('El correo electrónico no es válido.')",
+        "detail": "user.service",
+        "documentation": {}
+    },
+    {
+        "label": "test_health_check",
+        "kind": 2,
+        "importPath": "user.test",
+        "description": "user.test",
+        "peekOfCode": "def test_health_check():\n    response = requests.get('http://localhost:8000/api/health') # Realiza una solicitud GET a la ruta de verificación de salud\n    assert response.status_code == 200 # Verifica que el código de estado sea 200 (OK)\n    data = response.json() # Convierte la respuesta a formato JSON\n    assert data['status'] == 'ok' # Verifica que el estado en la respuesta sea 'ok'\n    assert data['message'] == 'API is healthy' # Verifica que el mensaje en la respuesta sea 'API is healthy'\ndef test_create_user():\n    user_data = {\n        'username': 'testuser',\n        'email': 'testuser@example.com',",
+        "detail": "user.test",
+        "documentation": {}
+    },
+    {
+        "label": "test_create_user",
+        "kind": 2,
+        "importPath": "user.test",
+        "description": "user.test",
+        "peekOfCode": "def test_create_user():\n    user_data = {\n        'username': 'testuser',\n        'email': 'testuser@example.com',\n        'password': 'testpassword',\n        'role': 'user'\n    }\n    response = requests.post('http://localhost:8000/api/users', json=user_data)\n    print(response.status_code) # Imprime el código de estado de la respuesta\n    assert response.status_code == 201 # Verifica que el código de estado sea 201 (Creado)",
+        "detail": "user.test",
+        "documentation": {}
+    },
+    {
+        "label": "test_list_users",
+        "kind": 2,
+        "importPath": "user.test",
+        "description": "user.test",
+        "peekOfCode": "def test_list_users():\n    response = requests.get('http://localhost:8000/api/users') # Realiza una solicitud GET a la ruta de listado de usuarios\n    print(response.status_code) # Imprime el código de estado de la respuesta\n    print(response.json()) # Imprime el contenido de la respuesta en formato JSON\n    assert response.status_code == 200 # Verifica que el código de estado sea 200 (OK)\n    data = response.json() # Convierte la respuesta a formato JSON\n    assert isinstance(data, list) # Verifica que la respuesta sea una lista\n    assert len(data) > 0 # Verifica que la lista de usuarios no esté vacía\ndef test_login_user():\n    login_data = {",
+        "detail": "user.test",
+        "documentation": {}
+    },
+    {
+        "label": "test_login_user",
+        "kind": 2,
+        "importPath": "user.test",
+        "description": "user.test",
+        "peekOfCode": "def test_login_user():\n    login_data = {\n        'username': 'testuser2',\n        'password': 'testpassword'\n    }\n    response = requests.post('http://localhost:8000/api/login', json=login_data) # Realiza una solicitud POST a la ruta de inicio de sesión\n    print(response.status_code) # Imprime el código de estado de la respuesta\n    print(response.json()) # Imprime el contenido de la respuesta en formato JSON\n    assert response.status_code == 200 # Verifica que el código de estado sea 200 (OK)\n    data = response.json() # Convierte la respuesta a formato JSON",
+        "detail": "user.test",
+        "documentation": {}
+    },
+    {
+        "label": "create_app",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config\n    app.config.from_object(Config)\n    # Registro del blueprint de rutas de usuario\n    app.register_blueprint(user_bp)\n    # Inicialización de la base de datos y JWT\n    db.init_app(app)\n    bcrypt.init_app(app)\n    jwt.init_app(app)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "jwt",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "jwt = JWTManager()\ndef create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config\n    app.config.from_object(Config)\n    # Registro del blueprint de rutas de usuario\n    app.register_blueprint(user_bp)\n    # Inicialización de la base de datos y JWT\n    db.init_app(app)\n    bcrypt.init_app(app)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "Config",
+        "kind": 6,
+        "importPath": "config",
+        "description": "config",
+        "peekOfCode": "class Config:\n    # Configuración general de la aplicación\n    SECRET_KEY = os.getenv('SECRET_KEY')\n    # Configuración de JWT\n    JWT_SECRET_KEY = os.getenv('SECRET_KEY')\n    JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=1)\n    JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)\n    # Configuración de la base de datos\n    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASEDIR, 'app.db')\n    SQLALCHEMY_TRACK_MODIFICATIONS = False",
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "BASEDIR",
+        "kind": 5,
+        "importPath": "config",
+        "description": "config",
+        "peekOfCode": "BASEDIR = os.path.abspath(os.path.dirname(__file__))\nclass Config:\n    # Configuración general de la aplicación\n    SECRET_KEY = os.getenv('SECRET_KEY')\n    # Configuración de JWT\n    JWT_SECRET_KEY = os.getenv('SECRET_KEY')\n    JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=1)\n    JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)\n    # Configuración de la base de datos\n    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASEDIR, 'app.db')",
+        "detail": "config",
+        "documentation": {}
+    }
+]
