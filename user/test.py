@@ -10,8 +10,8 @@ def test_health_check():
 
 def test_create_user():
     user_data = {
-        'username': 'testuser',
-        'email': 'testuser@example.com',
+        'username': 'testuser2',
+        'email': 'testuser2@example.com',
         'password': 'testpassword',
         'role': 'user'
     }
@@ -32,7 +32,21 @@ def test_list_users():
     assert len(data) > 0 # Verifica que la lista de usuarios no esté vacía
 
 
+def test_login_user():
+    login_data = {
+        'username': 'testuser2',
+        'password': 'testpassword'
+    }
+    response = requests.post('http://localhost:8000/api/login', json=login_data) # Realiza una solicitud POST a la ruta de inicio de sesión
+    print(response.status_code) # Imprime el código de estado de la respuesta
+    print(response.json()) # Imprime el contenido de la respuesta en formato JSON
+    assert response.status_code == 200 # Verifica que el código de estado sea 200 (OK)
+    data = response.json() # Convierte la respuesta a formato JSON
+    assert 'token' in data # Verifica que la respuesta contenga un token JWT
+
+
 if __name__ == '__main__':
-    test_health_check() # Ejecuta la función de prueba para verificar la salud de la API
-    test_list_users() # Ejecuta la función de prueba para listar los usuarios
+    #test_health_check() # Ejecuta la función de prueba para verificar la salud de la API
+    #test_list_users() # Ejecuta la función de prueba para listar los usuarios
     #test_create_user() # Ejecuta la función de prueba para crear un usuario
+    test_login_user() # Ejecuta la función de prueba para iniciar sesión con un usuario existente
