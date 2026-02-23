@@ -36,4 +36,5 @@ def test_login_user():
 if __name__ == '__main__':
     #test_health_check() # Ejecuta la función de prueba para verificar la salud de la API
     #test_list_users() # Ejecuta la función de prueba para listar los usuarios
+    test_login_user() # Ejecuta la función de prueba para iniciar sesión con un usuario existente
     pass
