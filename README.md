@@ -110,7 +110,6 @@ curl -X POST https://apigseis-411677847807.us-central1.run.app/api/login \
 ---
 
 ## Evidencia requerida
-Agrega capturas de pantalla en este README (o en una carpeta `/evidencia`) de:
 - **API funcionando localmente**
 - <img src="evidencia/localhost.png" width="800" height="400"  alt="Evidencia API">
 - **Construcción de imagen Docker**
