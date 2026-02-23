@@ -110,18 +110,45 @@ curl -X POST https://apigseis-411677847807.us-central1.run.app/api/login \
 ---
 
 ## Evidencia requerida
-- **API funcionando localmente**
-- <img src="evidencia/localhost.png" width="800" height="400"  alt="Evidencia API">
-- **Construcción de imagen Docker**
-- <img src="evidencia/buildDocker.png" width="800" height="400"  alt="Evidencia API">
-- **Contenedor ejecutándose**
-- <img src="evidencia/docker.png" width="800" height="400"  alt="Evidencia API">
-- **Prueba curl exitosa**
-- <img src="evidencia/health.png" width="800" height="200"  alt="Evidencia API">
-- <img src="evidencia/listUsers.png" width="800" height="450"  alt="Evidencia API">
-- <img src="evidencia/createUser.png" width="800" height="250"  alt="Evidencia API">
-- <img src="evidencia/login.png" width="800" height="200"  alt="Evidencia API">
 
-- **API desplegada en Cloud**
-- <img src="evidencia/cloud.png" width="800" height="300"  alt="Evidencia API">
-- <img src="evidencia/cloud2.png" width="800" height="200"  alt="Evidencia API">
+**API funcionando localmente**
+
+<div align="center">
+  <img src="evidencia/localhost.png" width="800" height="450" alt="Evidencia API">
+</div>
+
+**Construcción de imagen Docker**
+
+<div align="center">
+  <img src="evidencia/buildDocker.png" width="800" height="400" alt="Evidencia API">
+</div>
+
+**Contenedor ejecutándose**
+
+<div align="center">
+  <img src="evidencia/docker.png" width="800" height="400" alt="Evidencia API">
+</div>
+
+**Prueba curl exitosa**
+
+<div align="center">
+  <img src="evidencia/health.png" width="800" height="200" alt="Evidencia API">
+</div>
+<div align="center">
+  <img src="evidencia/listUsers.png" width="800" height="450" alt="Evidencia API">
+</div>
+<div align="center">
+  <img src="evidencia/createUser.png" width="800" height="250" alt="Evidencia API">
+</div>
+<div align="center">
+  <img src="evidencia/login.png" width="800" height="200" alt="Evidencia API">
+</div>
+
+**API desplegada en Cloud**
+
+<div align="center">
+  <img src="evidencia/cloud.png" width="800" height="300" alt="Evidencia API">
+</div>
+<div align="center">
+  <img src="evidencia/cloud2.png" width="800" height="200" alt="Evidencia API">
+</div>
