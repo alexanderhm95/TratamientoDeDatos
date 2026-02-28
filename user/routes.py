@@ -7,6 +7,7 @@ user_bp = Blueprint('user', __name__)
 """
 Ruta para verificar el estado de la API. Esta ruta responde a solicitudes GET y devuelve un mensaje indicando que la API está saludable.
 """
+@max_retries(3)
 @user_bp.route('/api/health', methods=['GET']) # Define una ruta para verificar el estado de la API
 def health_check():
     return jsonify({'status': 'ok', 'message': 'API is healthy'}) # Devuelve un mensaje indicando que la API está saludable

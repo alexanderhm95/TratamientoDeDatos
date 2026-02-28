@@ -238,8 +238,17 @@
         "kind": 5,
         "importPath": "user.routes",
         "description": "user.routes",
-        "peekOfCode": "user_bp = Blueprint('user', __name__)\n\"\"\"\nRuta para verificar el estado de la API. Esta ruta responde a solicitudes GET y devuelve un mensaje indicando que la API está saludable.\n\"\"\"\n@user_bp.route('/api/health', methods=['GET']) # Define una ruta para verificar el estado de la API\ndef health_check():\n    return jsonify({'status': 'ok', 'message': 'API is healthy'}) # Devuelve un mensaje indicando que la API está saludable\n\"\"\"\nRuta para crear un nuevo usuario. Esta ruta responde a solicitudes POST, recibe datos en formato JSON y utiliza la función create_user para agregar un nuevo usuario a la base de datos.\n\"\"\"",
+        "peekOfCode": "user_bp = Blueprint('user', __name__)\n\"\"\"\nRuta para verificar el estado de la API. Esta ruta responde a solicitudes GET y devuelve un mensaje indicando que la API está saludable.\n\"\"\"\n@max_retries(3)\n@user_bp.route('/api/health', methods=['GET']) # Define una ruta para verificar el estado de la API\ndef health_check():\n    return jsonify({'status': 'ok', 'message': 'API is healthy'}) # Devuelve un mensaje indicando que la API está saludable\n\"\"\"\nRuta para crear un nuevo usuario. Esta ruta responde a solicitudes POST, recibe datos en formato JSON y utiliza la función create_user para agregar un nuevo usuario a la base de datos.",
         "detail": "user.routes",
+        "documentation": {}
+    },
+    {
+        "label": "create_user",
+        "kind": 2,
+        "importPath": "user.service",
+        "description": "user.service",
+        "peekOfCode": "def create_user(username, email, password, role='user'):\n    \"\"\"Crea un nuevo usuario en la base de datos.\"\"\"\n    try:\n        if User.query.filter_by(username=username).first():\n            raise ValueError('El nombre de usuario ya existe.')\n        if User.query.filter_by(email=email).first():\n            raise ValueError('El correo electrónico ya está registrado.')\n        # Verificacion de email\n        if email.count('@') != 1 or email.rfind('.') < email.find('@'):\n            raise ValueError('El correo electrónico no es válido.')",
+        "detail": "user.service",
         "documentation": {}
     },
     {
@@ -257,15 +266,6 @@
         "importPath": "user.service",
         "description": "user.service",
         "peekOfCode": "def login_user(username, password):\n    \"\"\"Verifica las credenciales del usuario y devuelve el usuario si son correctas.\"\"\"\n    try:\n        user = User.query.filter_by(username=username).first()\n        if user and user.check_password(password):\n            return user\n        else:\n            raise ValueError('Credenciales inválidas.')\n    except Exception as e:\n        raise e",
-        "detail": "user.service",
-        "documentation": {}
-    },
-    {
-        "label": "create_user",
-        "kind": 2,
-        "importPath": "user.service",
-        "description": "user.service",
-        "peekOfCode": "def create_user(username, email, password, role='user'):\n    \"\"\"Crea un nuevo usuario en la base de datos.\"\"\"\n    try:\n        if User.query.filter_by(username=username).first():\n            raise ValueError('El nombre de usuario ya existe.')\n        if User.query.filter_by(email=email).first():\n            raise ValueError('El correo electrónico ya está registrado.')\n        # Verificacion de email\n        if email.count('@') != 1 or email.rfind('.') < email.find('@'):\n            raise ValueError('El correo electrónico no es válido.')",
         "detail": "user.service",
         "documentation": {}
     },
