@@ -1,6 +1,7 @@
 from flask import jsonify, request
 from flask import Blueprint
 from .service import create_user, list_users, login_user
+from flask import render_template
 
 user_bp = Blueprint('user', __name__)
 
@@ -35,6 +36,16 @@ Ruta para listar todos los usuarios. Esta ruta responde a solicitudes GET y devu
 def list_users_route():
     users = list_users() # Llama a la función list_users para obtener una lista de todos los usuarios en la base de datos
     return jsonify([user.to_dict() for user in users]) # Devuelve la lista de usuarios en formato JSON
+
+
+
+"""
+Ruta para mostrar la página de login (HTML).
+"""
+@user_bp.route('/login', methods=['GET'])
+def login_page():
+    return render_template('utils/auth.html')
+
 
 
 """
