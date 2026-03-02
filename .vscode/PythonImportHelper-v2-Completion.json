@@ -1,5 +1,143 @@
 [
     {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "current_app",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "current_app",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jwt_required",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "JWTManager",
+        "importPath": "flask_jwt_extended",
+        "description": "flask_jwt_extended",
+        "isExtraImport": true,
+        "detail": "flask_jwt_extended",
+        "documentation": {}
+    },
+    {
+        "label": "asyncio",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "asyncio",
+        "description": "asyncio",
+        "detail": "asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "CedulaScraper",
+        "importPath": "utils.scraper_cedulan",
+        "description": "utils.scraper_cedulan",
+        "isExtraImport": true,
+        "detail": "utils.scraper_cedulan",
+        "documentation": {}
+    },
+    {
         "label": "jwt",
         "kind": 6,
         "isExtraImport": true,
@@ -41,6 +179,30 @@
         "documentation": {}
     },
     {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "timedelta",
         "importPath": "datetime",
         "description": "datetime",
@@ -57,60 +219,87 @@
         "documentation": {}
     },
     {
-        "label": "current_app",
-        "importPath": "flask",
-        "description": "flask",
+        "label": "Message",
+        "importPath": "flask_mail",
+        "description": "flask_mail",
         "isExtraImport": true,
-        "detail": "flask",
+        "detail": "flask_mail",
         "documentation": {}
     },
     {
-        "label": "jsonify",
-        "importPath": "flask",
-        "description": "flask",
+        "label": "Mail",
+        "importPath": "flask_mail",
+        "description": "flask_mail",
         "isExtraImport": true,
-        "detail": "flask",
+        "detail": "flask_mail",
         "documentation": {}
     },
     {
-        "label": "request",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "Blueprint",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "Flask",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "requests",
+        "label": "secrets",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "requests",
-        "description": "requests",
-        "detail": "requests",
+        "importPath": "secrets",
+        "description": "secrets",
+        "detail": "secrets",
         "documentation": {}
     },
     {
-        "label": "JWTManager",
-        "importPath": "flask_jwt_extended",
-        "description": "flask_jwt_extended",
+        "label": "string",
+        "kind": 6,
         "isExtraImport": true,
-        "detail": "flask_jwt_extended",
+        "importPath": "string",
+        "description": "string",
+        "detail": "string",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "async_playwright",
+        "importPath": "playwright.async_api",
+        "description": "playwright.async_api",
+        "isExtraImport": true,
+        "detail": "playwright.async_api",
+        "documentation": {}
+    },
+    {
+        "label": "async_playwright",
+        "importPath": "playwright.async_api",
+        "description": "playwright.async_api",
+        "isExtraImport": true,
+        "detail": "playwright.async_api",
+        "documentation": {}
+    },
+    {
+        "label": "async_playwright",
+        "importPath": "playwright.async_api",
+        "description": "playwright.async_api",
+        "isExtraImport": true,
+        "detail": "playwright.async_api",
+        "documentation": {}
+    },
+    {
+        "label": "async_playwright",
+        "importPath": "playwright.async_api",
+        "description": "playwright.async_api",
+        "isExtraImport": true,
+        "detail": "playwright.async_api",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
         "documentation": {}
     },
     {
@@ -154,6 +343,14 @@
         "documentation": {}
     },
     {
+        "label": "services_bp",
+        "importPath": "services.scraper_routes",
+        "description": "services.scraper_routes",
+        "isExtraImport": true,
+        "detail": "services.scraper_routes",
+        "documentation": {}
+    },
+    {
         "label": "os",
         "kind": 6,
         "isExtraImport": true,
@@ -168,6 +365,96 @@
         "description": "dotenv",
         "isExtraImport": true,
         "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "verificar_api_cedula",
+        "kind": 2,
+        "importPath": "services.scraper_routes",
+        "description": "services.scraper_routes",
+        "peekOfCode": "def verificar_api_cedula():\n    \"\"\"\n    Verifica si el API de búsqueda de cédula está disponible.\n    No requiere autenticación (es solo verificación de estado).\n    \"\"\"\n    try:\n        # URL del API SRI que usamos\n        api_url = \"https://srienlinea.sri.gob.ec/movil-servicios/api/v1.0/deudas/porDenominacion/TEST/?tipoPersona=N&resultados=1\"\n        # Intentar hacer una solicitud al API con timeout corto\n        response = requests.get(api_url, timeout=3)",
+        "detail": "services.scraper_routes",
+        "documentation": {}
+    },
+    {
+        "label": "buscar_cedula",
+        "kind": 2,
+        "importPath": "services.scraper_routes",
+        "description": "services.scraper_routes",
+        "peekOfCode": "def buscar_cedula():\n    \"\"\"\n    Búsqueda de cédula por nombre.\n    Datos esperados:\n    {\n        \"nombre\": \"Juan Pérez González\"\n    }\n    Respuesta exitosa:\n    {\n        \"api_url\": \"https://srienlinea.sri.gob.ec/...\",",
+        "detail": "services.scraper_routes",
+        "documentation": {}
+    },
+    {
+        "label": "services_bp",
+        "kind": 5,
+        "importPath": "services.scraper_routes",
+        "description": "services.scraper_routes",
+        "peekOfCode": "services_bp = Blueprint('services', __name__, url_prefix='/api')\n@services_bp.route('/verificar-api-cedula', methods=['GET'])\ndef verificar_api_cedula():\n    \"\"\"\n    Verifica si el API de búsqueda de cédula está disponible.\n    No requiere autenticación (es solo verificación de estado).\n    \"\"\"\n    try:\n        # URL del API SRI que usamos\n        api_url = \"https://srienlinea.sri.gob.ec/movil-servicios/api/v1.0/deudas/porDenominacion/TEST/?tipoPersona=N&resultados=1\"",
+        "detail": "services.scraper_routes",
+        "documentation": {}
+    },
+    {
+        "label": "ValidationError",
+        "kind": 6,
+        "importPath": "user.exceptions",
+        "description": "user.exceptions",
+        "peekOfCode": "class ValidationError(ValueError):\n    \"\"\"Excepción lanzada cuando hay un error de validación.\"\"\"\n    pass\nclass UsernameError(ValidationError):\n    \"\"\"Excepción lanzada cuando hay un error con el nombre de usuario.\"\"\"\n    pass\nclass EmailError(ValidationError):\n    \"\"\"Excepción lanzada cuando hay un error con el correo electrónico.\"\"\"\n    pass\nclass PasswordError(ValidationError):",
+        "detail": "user.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "UsernameError",
+        "kind": 6,
+        "importPath": "user.exceptions",
+        "description": "user.exceptions",
+        "peekOfCode": "class UsernameError(ValidationError):\n    \"\"\"Excepción lanzada cuando hay un error con el nombre de usuario.\"\"\"\n    pass\nclass EmailError(ValidationError):\n    \"\"\"Excepción lanzada cuando hay un error con el correo electrónico.\"\"\"\n    pass\nclass PasswordError(ValidationError):\n    \"\"\"Excepción lanzada cuando hay un error con la contraseña.\"\"\"\n    pass\nclass UserNotFoundError(ValidationError):",
+        "detail": "user.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "EmailError",
+        "kind": 6,
+        "importPath": "user.exceptions",
+        "description": "user.exceptions",
+        "peekOfCode": "class EmailError(ValidationError):\n    \"\"\"Excepción lanzada cuando hay un error con el correo electrónico.\"\"\"\n    pass\nclass PasswordError(ValidationError):\n    \"\"\"Excepción lanzada cuando hay un error con la contraseña.\"\"\"\n    pass\nclass UserNotFoundError(ValidationError):\n    \"\"\"Excepción lanzada cuando el usuario no se encuentra.\"\"\"\n    pass\nclass InvalidCredentialsError(ValidationError):",
+        "detail": "user.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "PasswordError",
+        "kind": 6,
+        "importPath": "user.exceptions",
+        "description": "user.exceptions",
+        "peekOfCode": "class PasswordError(ValidationError):\n    \"\"\"Excepción lanzada cuando hay un error con la contraseña.\"\"\"\n    pass\nclass UserNotFoundError(ValidationError):\n    \"\"\"Excepción lanzada cuando el usuario no se encuentra.\"\"\"\n    pass\nclass InvalidCredentialsError(ValidationError):\n    \"\"\"Excepción lanzada cuando las credenciales son inválidas.\"\"\"\n    pass\nclass UserAlreadyExistsError(ValidationError):",
+        "detail": "user.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "UserNotFoundError",
+        "kind": 6,
+        "importPath": "user.exceptions",
+        "description": "user.exceptions",
+        "peekOfCode": "class UserNotFoundError(ValidationError):\n    \"\"\"Excepción lanzada cuando el usuario no se encuentra.\"\"\"\n    pass\nclass InvalidCredentialsError(ValidationError):\n    \"\"\"Excepción lanzada cuando las credenciales son inválidas.\"\"\"\n    pass\nclass UserAlreadyExistsError(ValidationError):\n    \"\"\"Excepción lanzada cuando el usuario ya existe.\"\"\"\n    pass",
+        "detail": "user.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "InvalidCredentialsError",
+        "kind": 6,
+        "importPath": "user.exceptions",
+        "description": "user.exceptions",
+        "peekOfCode": "class InvalidCredentialsError(ValidationError):\n    \"\"\"Excepción lanzada cuando las credenciales son inválidas.\"\"\"\n    pass\nclass UserAlreadyExistsError(ValidationError):\n    \"\"\"Excepción lanzada cuando el usuario ya existe.\"\"\"\n    pass",
+        "detail": "user.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "UserAlreadyExistsError",
+        "kind": 6,
+        "importPath": "user.exceptions",
+        "description": "user.exceptions",
+        "peekOfCode": "class UserAlreadyExistsError(ValidationError):\n    \"\"\"Excepción lanzada cuando el usuario ya existe.\"\"\"\n    pass",
+        "detail": "user.exceptions",
         "documentation": {}
     },
     {
@@ -198,11 +485,29 @@
         "documentation": {}
     },
     {
+        "label": "index",
+        "kind": 2,
+        "importPath": "user.routes",
+        "description": "user.routes",
+        "peekOfCode": "def index():\n    # La redirección se maneja en JavaScript del cliente según el token en localStorage\n    return redirect(url_for('user.home'))\n\"\"\"\nRuta para mostrar la página home.\n\"\"\"\n@user_bp.route('/home', methods=['GET'])\ndef home():\n    return render_template('home.html')\n\"\"\"",
+        "detail": "user.routes",
+        "documentation": {}
+    },
+    {
+        "label": "home",
+        "kind": 2,
+        "importPath": "user.routes",
+        "description": "user.routes",
+        "peekOfCode": "def home():\n    return render_template('home.html')\n\"\"\"\nRuta para verificar el estado de la API. Esta ruta responde a solicitudes GET y devuelve un mensaje indicando que la API está saludable.\n\"\"\"\n@user_bp.route('/api/health', methods=['GET']) # Define una ruta para verificar el estado de la API\ndef health_check():\n    return jsonify({'status': 'ok', 'message': 'API is healthy'}) # Devuelve un mensaje indicando que la API está saludable\n\"\"\"\nRuta para crear un nuevo usuario. Esta ruta responde a solicitudes POST, recibe datos en formato JSON y utiliza la función create_user para agregar un nuevo usuario a la base de datos.",
+        "detail": "user.routes",
+        "documentation": {}
+    },
+    {
         "label": "health_check",
         "kind": 2,
         "importPath": "user.routes",
         "description": "user.routes",
-        "peekOfCode": "def health_check():\n    return jsonify({'status': 'ok', 'message': 'API is healthy'}) # Devuelve un mensaje indicando que la API está saludable\n\"\"\"\nRuta para crear un nuevo usuario. Esta ruta responde a solicitudes POST, recibe datos en formato JSON y utiliza la función create_user para agregar un nuevo usuario a la base de datos.\n\"\"\"\n@user_bp.route('/api/users', methods=['POST']) # Define una ruta para crear un nuevo usuario\ndef create_user_route():\n    data = request.get_json() # Obtiene los datos enviados en formato JSON\n    username = data.get('username') # Extrae el nombre de usuario del JSON\n    email = data.get('email') # Extrae el correo electrónico del JSON",
+        "peekOfCode": "def health_check():\n    return jsonify({'status': 'ok', 'message': 'API is healthy'}) # Devuelve un mensaje indicando que la API está saludable\n\"\"\"\nRuta para crear un nuevo usuario. Esta ruta responde a solicitudes POST, recibe datos en formato JSON y utiliza la función create_user para agregar un nuevo usuario a la base de datos.\n\"\"\"\n@user_bp.route('/api/users', methods=['POST']) # Define una ruta para crear un nuevo usuario\ndef create_user_route():\n    try:\n        data = request.get_json() # Obtiene los datos enviados en formato JSON\n        username = data.get('username') # Extrae el nombre de usuario del JSON",
         "detail": "user.routes",
         "documentation": {}
     },
@@ -211,7 +516,7 @@
         "kind": 2,
         "importPath": "user.routes",
         "description": "user.routes",
-        "peekOfCode": "def create_user_route():\n    data = request.get_json() # Obtiene los datos enviados en formato JSON\n    username = data.get('username') # Extrae el nombre de usuario del JSON\n    email = data.get('email') # Extrae el correo electrónico del JSON\n    password = data.get('password') # Extrae la contraseña del JSON\n    role = data.get('role', 'user') # Extrae el rol del usuario del JSON, por defecto es 'user'\n    user = create_user(username, email, password, role) # Llama a la función create_user para crear un nuevo usuario en la base de datos\n    return jsonify(user.to_dict()), 201 # Devuelve la información del nuevo usuario en formato JSON con un código de estado 201 (Creado)\n\"\"\"\nRuta para listar todos los usuarios. Esta ruta responde a solicitudes GET y devuelve una lista de todos los usuarios en la base de datos en formato JSON.",
+        "peekOfCode": "def create_user_route():\n    try:\n        data = request.get_json() # Obtiene los datos enviados en formato JSON\n        username = data.get('username') # Extrae el nombre de usuario del JSON\n        email = data.get('email') # Extrae el correo electrónico del JSON\n        password = data.get('password') # Extrae la contraseña del JSON\n        role = data.get('role', 'user') # Extrae el rol del usuario del JSON, por defecto es 'user'\n        user = create_user(username, email, password, role) # Llama a la función create_user para crear un nuevo usuario en la base de datos\n        return jsonify(user.to_dict()), 201 # Devuelve la información del nuevo usuario en formato JSON con un código de estado 201 (Creado)\n    except ValidationError as e:",
         "detail": "user.routes",
         "documentation": {}
     },
@@ -220,7 +525,43 @@
         "kind": 2,
         "importPath": "user.routes",
         "description": "user.routes",
-        "peekOfCode": "def list_users_route():\n    users = list_users() # Llama a la función list_users para obtener una lista de todos los usuarios en la base de datos\n    return jsonify([user.to_dict() for user in users]) # Devuelve la lista de usuarios en formato JSON\n\"\"\"\nRuta para iniciar sesión. Esta ruta responde a solicitudes POST, recibe datos en formato JSON y utiliza la función login_user para verificar las credenciales del usuario y devolver un token JWT si son correctas.\n\"\"\"\n@user_bp.route('/api/login', methods=['POST']) # Define una ruta para iniciar sesión\ndef login_user_route():\n    data = request.get_json() # Obtiene los datos enviados en formato JSON\n    username = data.get('username') # Extrae el nombre de usuario del JSON",
+        "peekOfCode": "def list_users_route():\n    users = list_users() # Llama a la función list_users para obtener una lista de todos los usuarios en la base de datos\n    return jsonify([user.to_dict() for user in users]) # Devuelve la lista de usuarios en formato JSON\n\"\"\"\nRuta para mostrar la página de login (HTML).\n\"\"\"\n@user_bp.route('/login', methods=['GET'])\ndef login_page():\n    return render_template('auth/auth.html')\n\"\"\"",
+        "detail": "user.routes",
+        "documentation": {}
+    },
+    {
+        "label": "login_page",
+        "kind": 2,
+        "importPath": "user.routes",
+        "description": "user.routes",
+        "peekOfCode": "def login_page():\n    return render_template('auth/auth.html')\n\"\"\"\nRuta para mostrar la página de registro (HTML).\n\"\"\"\n@user_bp.route('/register', methods=['GET'])\ndef register_page():\n    return render_template('auth/register.html')\n\"\"\"\nRuta para mostrar la página de recuperación de contraseña (HTML).",
+        "detail": "user.routes",
+        "documentation": {}
+    },
+    {
+        "label": "register_page",
+        "kind": 2,
+        "importPath": "user.routes",
+        "description": "user.routes",
+        "peekOfCode": "def register_page():\n    return render_template('auth/register.html')\n\"\"\"\nRuta para mostrar la página de recuperación de contraseña (HTML).\n\"\"\"\n@user_bp.route('/forgot-password', methods=['GET'])\ndef forgot_password_page():\n    return render_template('auth/forgot-password.html')\n\"\"\"\nRuta para procesar la solicitud de recuperación de contraseña.",
+        "detail": "user.routes",
+        "documentation": {}
+    },
+    {
+        "label": "forgot_password_page",
+        "kind": 2,
+        "importPath": "user.routes",
+        "description": "user.routes",
+        "peekOfCode": "def forgot_password_page():\n    return render_template('auth/forgot-password.html')\n\"\"\"\nRuta para procesar la solicitud de recuperación de contraseña.\n\"\"\"\n@user_bp.route('/api/forgot-password', methods=['POST'])\ndef forgot_password_route():\n    try:\n        data = request.get_json()\n        email = data.get('email', '').strip() if data.get('email') else ''",
+        "detail": "user.routes",
+        "documentation": {}
+    },
+    {
+        "label": "forgot_password_route",
+        "kind": 2,
+        "importPath": "user.routes",
+        "description": "user.routes",
+        "peekOfCode": "def forgot_password_route():\n    try:\n        data = request.get_json()\n        email = data.get('email', '').strip() if data.get('email') else ''\n        # Validar email\n        email = validate_email(email)\n        user = User.query.filter_by(email=email).first()\n        if user:\n            # Generar contraseña temporal aleatoria\n            temp_password = ''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(12))",
         "detail": "user.routes",
         "documentation": {}
     },
@@ -229,7 +570,7 @@
         "kind": 2,
         "importPath": "user.routes",
         "description": "user.routes",
-        "peekOfCode": "def login_user_route():\n    data = request.get_json() # Obtiene los datos enviados en formato JSON\n    username = data.get('username') # Extrae el nombre de usuario del JSON\n    password = data.get('password') # Extrae la contraseña del JSON\n    user = login_user(username, password) # Llama a la función login_user para verificar las credenciales del usuario\n    if user:\n        token = user.generate_jwt() # Genera un token JWT para el usuario autenticado\n        return jsonify({'token': token}) # Devuelve el token JWT en formato JSON\n    else:\n        return jsonify({'message': 'Invalid credentials'}), 401 # Devuelve un mensaje de error con un código de estado 401 (No autorizado) si las credenciales son inválidas",
+        "peekOfCode": "def login_user_route():\n    try:\n        data = request.get_json() # Obtiene los datos enviados en formato JSON\n        username = data.get('username') # Extrae el nombre de usuario del JSON\n        password = data.get('password') # Extrae la contraseña del JSON\n        user = login_user(username, password) # Llama a la función login_user para verificar las credenciales del usuario\n        if user:\n            token = user.generate_jwt() # Genera un token JWT para el usuario autenticado\n            return jsonify({'token': token}) # Devuelve el token JWT en formato JSON\n        else:",
         "detail": "user.routes",
         "documentation": {}
     },
@@ -238,7 +579,7 @@
         "kind": 5,
         "importPath": "user.routes",
         "description": "user.routes",
-        "peekOfCode": "user_bp = Blueprint('user', __name__)\n\"\"\"\nRuta para verificar el estado de la API. Esta ruta responde a solicitudes GET y devuelve un mensaje indicando que la API está saludable.\n\"\"\"\n@max_retries(3)\n@user_bp.route('/api/health', methods=['GET']) # Define una ruta para verificar el estado de la API\ndef health_check():\n    return jsonify({'status': 'ok', 'message': 'API is healthy'}) # Devuelve un mensaje indicando que la API está saludable\n\"\"\"\nRuta para crear un nuevo usuario. Esta ruta responde a solicitudes POST, recibe datos en formato JSON y utiliza la función create_user para agregar un nuevo usuario a la base de datos.",
+        "peekOfCode": "user_bp = Blueprint('user', __name__)\n\"\"\"\nRuta raíz que redirige a login o home según si está autenticado.\n\"\"\"\n@user_bp.route('/', methods=['GET'])\ndef index():\n    # La redirección se maneja en JavaScript del cliente según el token en localStorage\n    return redirect(url_for('user.home'))\n\"\"\"\nRuta para mostrar la página home.",
         "detail": "user.routes",
         "documentation": {}
     },
@@ -247,7 +588,7 @@
         "kind": 2,
         "importPath": "user.service",
         "description": "user.service",
-        "peekOfCode": "def create_user(username, email, password, role='user'):\n    \"\"\"Crea un nuevo usuario en la base de datos.\"\"\"\n    try:\n        if User.query.filter_by(username=username).first():\n            raise ValueError('El nombre de usuario ya existe.')\n        if User.query.filter_by(email=email).first():\n            raise ValueError('El correo electrónico ya está registrado.')\n        # Verificacion de email\n        if email.count('@') != 1 or email.rfind('.') < email.find('@'):\n            raise ValueError('El correo electrónico no es válido.')",
+        "peekOfCode": "def create_user(username, email, password, role='user'):\n    \"\"\"Crea un nuevo usuario en la base de datos.\"\"\"\n    try:\n        # Validar todos los campos de entrada\n        username = validate_username(username)\n        email = validate_email(email)\n        password = validate_password(password)\n        # Verificar que el username no exista\n        if User.query.filter_by(username=username).first():\n            raise UserAlreadyExistsError('El nombre de usuario ya está en uso.')",
         "detail": "user.service",
         "documentation": {}
     },
@@ -265,7 +606,7 @@
         "kind": 2,
         "importPath": "user.service",
         "description": "user.service",
-        "peekOfCode": "def login_user(username, password):\n    \"\"\"Verifica las credenciales del usuario y devuelve el usuario si son correctas.\"\"\"\n    try:\n        user = User.query.filter_by(username=username).first()\n        if user and user.check_password(password):\n            return user\n        else:\n            raise ValueError('Credenciales inválidas.')\n    except Exception as e:\n        raise e",
+        "peekOfCode": "def login_user(username, password):\n    \"\"\"Verifica las credenciales del usuario y devuelve el usuario si son correctas.\"\"\"\n    try:\n        # Validar entrada\n        username, password = validate_login_input(username, password)\n        user = User.query.filter_by(username=username).first()\n        if user:\n            password_valid = user.check_password(password)\n            if password_valid:\n                return user",
         "detail": "user.service",
         "documentation": {}
     },
@@ -306,11 +647,155 @@
         "documentation": {}
     },
     {
+        "label": "validate_email",
+        "kind": 2,
+        "importPath": "user.validators",
+        "description": "user.validators",
+        "peekOfCode": "def validate_email(email):\n    \"\"\"\n    Valida que el email tenga un formato correcto.\n    Args:\n        email: Correo electrónico a validar\n    Returns:\n        email limpio (sin espacios)\n    Raises:\n        EmailError: Si el email es inválido\n    \"\"\"",
+        "detail": "user.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validate_username",
+        "kind": 2,
+        "importPath": "user.validators",
+        "description": "user.validators",
+        "peekOfCode": "def validate_username(username):\n    \"\"\"\n    Valida que el username sea válido.\n    - Mínimo 3 caracteres\n    - Máximo 20 caracteres\n    - Solo letras, números, guiones y guiones bajos\n    Args:\n        username: Nombre de usuario a validar\n    Returns:\n        username limpio (sin espacios)",
+        "detail": "user.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validate_password",
+        "kind": 2,
+        "importPath": "user.validators",
+        "description": "user.validators",
+        "peekOfCode": "def validate_password(password):\n    \"\"\"\n    Valida que la contraseña sea segura.\n    - Mínimo 6 caracteres\n    - Máximo 128 caracteres\n    Args:\n        password: Contraseña a validar\n    Returns:\n        password\n    Raises:",
+        "detail": "user.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validate_login_input",
+        "kind": 2,
+        "importPath": "user.validators",
+        "description": "user.validators",
+        "peekOfCode": "def validate_login_input(username, password):\n    \"\"\"\n    Valida los datos de entrada para el login.\n    Args:\n        username: Nombre de usuario\n        password: Contraseña\n    Returns:\n        Tupla (username, password) validados\n    Raises:\n        ValidationError: Si hay error en la validación",
+        "detail": "user.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validate_password_match",
+        "kind": 2,
+        "importPath": "user.validators",
+        "description": "user.validators",
+        "peekOfCode": "def validate_password_match(password, confirm_password):\n    \"\"\"\n    Valida que dos contraseñas coincidan.\n    Args:\n        password: Primera contraseña\n        confirm_password: Confirmación de contraseña\n    Returns:\n        password si coinciden\n    Raises:\n        PasswordError: Si no coinciden",
+        "detail": "user.validators",
+        "documentation": {}
+    },
+    {
+        "label": "calculate_password_strength",
+        "kind": 2,
+        "importPath": "user.validators",
+        "description": "user.validators",
+        "peekOfCode": "def calculate_password_strength(password):\n    \"\"\"\n    Calcula el nivel de fortaleza de una contraseña (0-100).\n    Args:\n        password: Contraseña a evaluar\n    Returns:\n        Puntuación de fortaleza (0-100)\n    \"\"\"\n    if not password:\n        return 0",
+        "detail": "user.validators",
+        "documentation": {}
+    },
+    {
+        "label": "USERNAME_MIN_LENGTH",
+        "kind": 5,
+        "importPath": "user.validators",
+        "description": "user.validators",
+        "peekOfCode": "USERNAME_MIN_LENGTH = 3\nUSERNAME_MAX_LENGTH = 20\nPASSWORD_MIN_LENGTH = 6\nPASSWORD_MAX_LENGTH = 128\nTEMP_PASSWORD_LENGTH = 12\n# Patrón de email válido\nEMAIL_PATTERN = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'\n# Patrón de username válido (letras, números, guiones, guiones bajos)\nUSERNAME_PATTERN = r'^[a-zA-Z0-9_-]+$'\n# ==================== VALIDACIONES ====================",
+        "detail": "user.validators",
+        "documentation": {}
+    },
+    {
+        "label": "USERNAME_MAX_LENGTH",
+        "kind": 5,
+        "importPath": "user.validators",
+        "description": "user.validators",
+        "peekOfCode": "USERNAME_MAX_LENGTH = 20\nPASSWORD_MIN_LENGTH = 6\nPASSWORD_MAX_LENGTH = 128\nTEMP_PASSWORD_LENGTH = 12\n# Patrón de email válido\nEMAIL_PATTERN = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'\n# Patrón de username válido (letras, números, guiones, guiones bajos)\nUSERNAME_PATTERN = r'^[a-zA-Z0-9_-]+$'\n# ==================== VALIDACIONES ====================\ndef validate_email(email):",
+        "detail": "user.validators",
+        "documentation": {}
+    },
+    {
+        "label": "PASSWORD_MIN_LENGTH",
+        "kind": 5,
+        "importPath": "user.validators",
+        "description": "user.validators",
+        "peekOfCode": "PASSWORD_MIN_LENGTH = 6\nPASSWORD_MAX_LENGTH = 128\nTEMP_PASSWORD_LENGTH = 12\n# Patrón de email válido\nEMAIL_PATTERN = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'\n# Patrón de username válido (letras, números, guiones, guiones bajos)\nUSERNAME_PATTERN = r'^[a-zA-Z0-9_-]+$'\n# ==================== VALIDACIONES ====================\ndef validate_email(email):\n    \"\"\"",
+        "detail": "user.validators",
+        "documentation": {}
+    },
+    {
+        "label": "PASSWORD_MAX_LENGTH",
+        "kind": 5,
+        "importPath": "user.validators",
+        "description": "user.validators",
+        "peekOfCode": "PASSWORD_MAX_LENGTH = 128\nTEMP_PASSWORD_LENGTH = 12\n# Patrón de email válido\nEMAIL_PATTERN = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'\n# Patrón de username válido (letras, números, guiones, guiones bajos)\nUSERNAME_PATTERN = r'^[a-zA-Z0-9_-]+$'\n# ==================== VALIDACIONES ====================\ndef validate_email(email):\n    \"\"\"\n    Valida que el email tenga un formato correcto.",
+        "detail": "user.validators",
+        "documentation": {}
+    },
+    {
+        "label": "TEMP_PASSWORD_LENGTH",
+        "kind": 5,
+        "importPath": "user.validators",
+        "description": "user.validators",
+        "peekOfCode": "TEMP_PASSWORD_LENGTH = 12\n# Patrón de email válido\nEMAIL_PATTERN = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'\n# Patrón de username válido (letras, números, guiones, guiones bajos)\nUSERNAME_PATTERN = r'^[a-zA-Z0-9_-]+$'\n# ==================== VALIDACIONES ====================\ndef validate_email(email):\n    \"\"\"\n    Valida que el email tenga un formato correcto.\n    Args:",
+        "detail": "user.validators",
+        "documentation": {}
+    },
+    {
+        "label": "EMAIL_PATTERN",
+        "kind": 5,
+        "importPath": "user.validators",
+        "description": "user.validators",
+        "peekOfCode": "EMAIL_PATTERN = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'\n# Patrón de username válido (letras, números, guiones, guiones bajos)\nUSERNAME_PATTERN = r'^[a-zA-Z0-9_-]+$'\n# ==================== VALIDACIONES ====================\ndef validate_email(email):\n    \"\"\"\n    Valida que el email tenga un formato correcto.\n    Args:\n        email: Correo electrónico a validar\n    Returns:",
+        "detail": "user.validators",
+        "documentation": {}
+    },
+    {
+        "label": "USERNAME_PATTERN",
+        "kind": 5,
+        "importPath": "user.validators",
+        "description": "user.validators",
+        "peekOfCode": "USERNAME_PATTERN = r'^[a-zA-Z0-9_-]+$'\n# ==================== VALIDACIONES ====================\ndef validate_email(email):\n    \"\"\"\n    Valida que el email tenga un formato correcto.\n    Args:\n        email: Correo electrónico a validar\n    Returns:\n        email limpio (sin espacios)\n    Raises:",
+        "detail": "user.validators",
+        "documentation": {}
+    },
+    {
+        "label": "CedulaScraper",
+        "kind": 6,
+        "importPath": "utils.scraper_cedulan",
+        "description": "utils.scraper_cedulan",
+        "peekOfCode": "class CedulaScraper:\n    \"\"\"Scraper para la página de consulta de cédulas de Registro Civil de Ecuador.\"\"\"\n    def __init__(self):\n        self.url = \"https://www.ecuadorlegalonline.com/consultas/registro-civil/buscar-numero-de-cedula-por-nombre/\"\n        self.results = []\n    async def scrape_cedula(self, cedula):\n        \"\"\"\n        Scrapea la información de una persona por su cédula.\n        Args:\n            cedula: Cédula de la persona (ej: 1720000001)",
+        "detail": "utils.scraper_cedulan",
+        "documentation": {}
+    },
+    {
+        "label": "VehicleScraperANT",
+        "kind": 6,
+        "importPath": "utils.scraper_placar",
+        "description": "utils.scraper_placar",
+        "peekOfCode": "class VehicleScraperANT:\n    \"\"\"Scraper para la página de consulta de vehículos por placa de la ANT Ecuador.\"\"\"\n    def __init__(self):\n        self.url = \"https://consultasecuador.com/en-linea/transito/consultar-propietario-vehiculo\"\n        self.results = []\n    async def scrape_vehicle(self, placa):\n        \"\"\"\n        Scrapea la información de un vehículo por su placa.\n        Args:\n            placa: Placa del vehículo (ej: PIZ-0001)",
+        "detail": "utils.scraper_placar",
+        "documentation": {}
+    },
+    {
+        "label": "CedulaScraper",
+        "kind": 6,
+        "importPath": "utils.scraper_pointsc",
+        "description": "utils.scraper_pointsc",
+        "peekOfCode": "class CedulaScraper:\n    \"\"\"Scraper para la página de consulta de cédulas de Registro Civil de Ecuador.\"\"\"\n    def __init__(self):\n        self.url = \"https://www.ecuadorlegalonline.com/consultas/agencia-nacional-de-transito/consultar-puntos-de-licencia/\"\n        self.results = []\n    async def scrape_cedula(self, cedula):\n        \"\"\"\n        Scrapea la información de una persona por su cédula.\n        Args:\n            cedula: Cédula de la persona (ej: 1720000001)",
+        "detail": "utils.scraper_pointsc",
+        "documentation": {}
+    },
+    {
         "label": "create_app",
         "kind": 2,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "def create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config\n    app.config.from_object(Config)\n    # Registro del blueprint de rutas de usuario\n    app.register_blueprint(user_bp)\n    # Inicialización de la base de datos y JWT\n    db.init_app(app)\n    bcrypt.init_app(app)\n    jwt.init_app(app)",
+        "peekOfCode": "def create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config\n    app.config.from_object(Config)\n    # Registro del blueprint de rutas de usuario\n    app.register_blueprint(user_bp)\n    # Registro del blueprint de servicios\n    app.register_blueprint(services_bp)\n    # Inicialización de la base de datos y JWT\n    db.init_app(app)",
         "detail": "app",
         "documentation": {}
     },
@@ -319,7 +804,16 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "jwt = JWTManager()\ndef create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config\n    app.config.from_object(Config)\n    # Registro del blueprint de rutas de usuario\n    app.register_blueprint(user_bp)\n    # Inicialización de la base de datos y JWT\n    db.init_app(app)\n    bcrypt.init_app(app)",
+        "peekOfCode": "jwt = JWTManager()\nmail = Mail()\ndef create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config\n    app.config.from_object(Config)\n    # Registro del blueprint de rutas de usuario\n    app.register_blueprint(user_bp)\n    # Registro del blueprint de servicios\n    app.register_blueprint(services_bp)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "mail",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "mail = Mail()\ndef create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config\n    app.config.from_object(Config)\n    # Registro del blueprint de rutas de usuario\n    app.register_blueprint(user_bp)\n    # Registro del blueprint de servicios\n    app.register_blueprint(services_bp)\n    # Inicialización de la base de datos y JWT",
         "detail": "app",
         "documentation": {}
     },

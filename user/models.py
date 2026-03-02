@@ -25,8 +25,8 @@ class User(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     def __init__(self, username, email, password, role='user'):
-        self.username = username
-        self.email = email
+        self.username = username.strip() if username else username
+        self.email = email.strip() if email else email
         self.password = password  # Usar el setter correctamente
         self.role = role
 
