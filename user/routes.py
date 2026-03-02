@@ -12,6 +12,15 @@ import string
 
 user_bp = Blueprint('user', __name__)
 
+# Importar limiter y cache desde app
+def get_limiter():
+    from app import limiter
+    return limiter
+
+def get_cache():
+    from app import cache
+    return cache
+
 """
 Ruta raíz que redirige a login o home según si está autenticado.
 """
@@ -39,8 +48,10 @@ def health_check():
 
 """
 Ruta para crear un nuevo usuario. Esta ruta responde a solicitudes POST, recibe datos en formato JSON y utiliza la función create_user para agregar un nuevo usuario a la base de datos.
+RATE LIMIT: 5 intentos por minuto por IP (prevención de spam)
 """
-@user_bp.route('/api/users', methods=['POST']) # Define una ruta para crear un nuevo usuario
+@user_bp.route('/api/users', methods=['POST'])
+@get_limiter().limit("5 per minute")  # Max 5 registros por minuto por IP
 def create_user_route():
     try:
         data = request.get_json() # Obtiene los datos enviados en formato JSON
@@ -58,13 +69,30 @@ def create_user_route():
 
 
 """
-
 Ruta para listar todos los usuarios. Esta ruta responde a solicitudes GET y devuelve una lista de todos los usuarios en la base de datos en formato JSON.
+CACHE: 5 minutos (mejora de rendimiento)
+RATE LIMIT: 30 intentos por hora
 """
-@user_bp.route('/api/users', methods=['GET']) # Define una ruta para listar todos los usuarios
+@user_bp.route('/api/users', methods=['GET'])
+@get_limiter().limit("30 per hour")  # Max 30 solicitudes por hora por IP
 def list_users_route():
-    users = list_users() # Llama a la función list_users para obtener una lista de todos los usuarios en la base de datos
-    return jsonify([user.to_dict() for user in users]) # Devuelve la lista de usuarios en formato JSON
+    # Aplicar cache manualmente en tiempo de ejecución
+    cache = get_cache()
+    cache_key = 'all_users_list'
+    
+    # Intentar obtener del cache
+    cached_result = cache.get(cache_key)
+    if cached_result is not None:
+        return jsonify(cached_result)
+    
+    # Si no está en cache, obtener de la BD
+    users = list_users()
+    result = [user.to_dict() for user in users]
+    
+    # Guardar en cache por 5 minutos
+    cache.set(cache_key, result, timeout=300)
+    
+    return jsonify(result)
 
 
 
@@ -94,8 +122,10 @@ def forgot_password_page():
 
 """
 Ruta para procesar la solicitud de recuperación de contraseña.
+RATE LIMIT: 3 intentos por hora por IP (prevención de spam)
 """
 @user_bp.route('/api/forgot-password', methods=['POST'])
+@get_limiter().limit("3 per hour")  # Max 3 intentos de recuperación por hora
 def forgot_password_route():
     try:
         data = request.get_json()
@@ -162,8 +192,10 @@ def forgot_password_route():
 
 """
 Ruta para iniciar sesión. Esta ruta responde a solicitudes POST, recibe datos en formato JSON y utiliza la función login_user para verificar las credenciales del usuario y devolver un token JWT si son correctas.
+RATE LIMIT: 5 intentos por minuto por IP (prevención de brute force)
 """
-@user_bp.route('/api/login', methods=['POST']) # Define una ruta para iniciar sesión
+@user_bp.route('/api/login', methods=['POST'])
+@get_limiter().limit("5 per minute")  # Max 5 intentos de login por minuto por IP
 def login_user_route():
     try:
         data = request.get_json() # Obtiene los datos enviados en formato JSON

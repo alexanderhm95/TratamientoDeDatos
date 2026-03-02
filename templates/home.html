@@ -121,13 +121,24 @@
             const token = localStorage.getItem('token');
             if (!token) {
                 // Si no hay token, redirige al login
+                console.log('No token found, redirecting to login');
                 window.location.href = '/login';
+                return false;
             }
+            return true;
         }
 
         function logout() {
-            // Elimina el token del localStorage
-            localStorage.removeItem('token');
+            // Elimina TODOS los datos del localStorage
+            localStorage.clear();
+            
+            // Elimina cookies del navegador (si las hay)
+            document.cookie.split(";").forEach((c) => {
+                document.cookie = c
+                    .replace(/^ +/, "")
+                    .replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
+            });
+            
             // Redirige al login
             window.location.href = '/login';
         }
