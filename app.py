@@ -30,4 +30,4 @@ def create_app():
 
 if __name__ == '__main__':  # Ejecuta la aplicación Flask
     app = create_app()
-    app.run(debug=True, host='0.0.0.0', port=8000) # Permite que la aplicación sea accesible desde cualquier IP en el puerto 8080
+    app.run(debug=True, host='0.0.0.0', port=8080) # Permite que la aplicación sea accesible desde cualquier IP en el puerto 8080
