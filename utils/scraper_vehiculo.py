@@ -17,24 +17,24 @@ import json
 from datetime import datetime
 
 
-class CedulaScraper:
-    """Scraper para la página de consulta de cédulas de Registro Civil de Ecuador."""
+class VehiculoScraper:
+    """Scraper para la página de consulta de vehículos del Registro Civil de Ecuador."""
     
     def __init__(self):
-        self.url = "https://www.ecuadorlegalonline.com/consultas/registro-civil/buscar-numero-de-cedula-por-nombre/"
+        self.url = "https://servicios.axiscloud.ec/CRV/?ps_empresa=05"
         self.results = []
     
-    async def scrape_cedula(self, cedula):
+    async def scrape_cedula(self, placa):
         """
-        Scrapea la información de una persona por su cédula.
+        Scrapea la información de un vehículo por su placa.
         
         Args:
-            cedula: Cédula de la persona (ej: 1720000001)
+            placa: Placa del vehículo (ej: PSE0881)
             
         Returns:
-            Diccionario con la información de la persona
+            Diccionario con la información del vehículo
         """
-        api_base = "https://srienlinea.sri.gob.ec/movil-servicios/api/v1.0/deudas/porDenominacion/"
+        api_base = "https://servicios.axiscloud.ec/CRV/paginas/datosVehiculo.jsp"
 
         async with async_playwright() as p:
             # Paso 1: Descargar y lanzar navegador
@@ -46,39 +46,12 @@ class CedulaScraper:
             print(f"📄 Paso 2: Navegando a {self.url}")
             await page.goto(self.url, wait_until="domcontentloaded", timeout=15000)
            
-           # Esperar un poco para asegurarse de que la página esté completamente cargada
-            await asyncio.sleep(5)
-           
-            
-            # Paso 3.5: Cerrar el dialog fc-monetization-dialog-container si existe
-            print("🗑️  Paso 3.5: Cerrando popup/dialog si existe...")
-            try:
-                # Intentar encontrar y cerrar el dialog
-                dialog = await page.query_selector('.fc-monetization-dialog-container')
-                if dialog:
-                    # Buscar botón cerrar dentro del dialog
-                    close_button = await page.query_selector('.fc-monetization-dialog-container button.fc-button, .fc-monetization-dialog-container [class*="close"], .fc-monetization-dialog-container [aria-label*="close"]')
-                    if close_button:
-                        await close_button.click()
-                        await asyncio.sleep(0.5)
-                    else:
-                        # Si no hay botón, eliminar el dialog directamente
-                        await page.evaluate('() => { const el = document.querySelector(".fc-monetization-dialog-container"); if (el) el.remove(); }')
-                else:
-                    print("   ℹ️  No hay dialog visible")
-            except Exception as e:
-                print(f"   ⚠️  No se pudo cerrar el dialog: {e}")
-            
-            # Pequeña pausa para que se estabilice la página
-            await asyncio.sleep(0.5)
-            print("✓ Página cargada exitosamente")
-            
-            # Paso 5: Limpiar y escribir la cédula
-            print(f"✏️  Paso 5: Escribiendo cédula: {cedula}")
-            await page.get_by_role("textbox", name="Escribe aquí…").click()
-            await page.get_by_role("textbox", name="Escribe aquí…").fill(cedula)
-            
-            print(f"✓ Cédula '{cedula}' ingresada")
+           # Esperar hasta que "Consulta de Vehículo" esté visible
+            await page.wait_for_selector("text=Consulta de Vehículo", timeout=10000)
+
+            # Damos click sobre el input de placa y llenamos el formulario
+            await page.get_by_role("textbox", name="Placa/VIN (Chasís)/Motor:").click()
+            await page.get_by_role("textbox", name="Placa/VIN (Chasís)/Motor:").fill(placa)
 
             # Capturar respuestas de APIs (con cookies y headers del navegador)
             captured_response = {}
@@ -94,12 +67,13 @@ class CedulaScraper:
             # Registrar listener ANTES de hacer click
             page.on("response", handle_response)
             
-            # Hacer clic en el botón Consultar
-            print("🖱️  Haciendo clic en 'Consultar'...")
-            await page.get_by_role("button", name="Consultar").click()
-            
-            # Esperar un poco para asegurar que la respuesta se ha capturado
-            await asyncio.sleep(2)
+            await page.get_by_role("button", name="Buscar").click()
+
+            # Esperar hasta que Consultando se oculte
+            await page.wait_for_selector("text=Consultando", state="hidden", timeout=10000)
+
+            # Esperar un poco extra para asegurar que la respuesta se ha capturado
+            await asyncio.sleep(1)
             
             # Procesar la respuesta capturada
             working_api = None
@@ -154,7 +128,7 @@ class CedulaScraper:
                 # Cerrar navegador y devolver el API
                 await browser.close()
                 return {
-                    'nombre_busqueda': cedula,
+                    'nombre_busqueda': placa,
                     'timestamp': datetime.now().isoformat(),
                     'api_url': working_api['url'],
                     'api_data': working_api['data'],
@@ -164,7 +138,7 @@ class CedulaScraper:
                 print("   ✗ Ningún API funcionó correctamente")
                 await browser.close()
                 return {
-                    'nombre_busqueda': cedula,
+                    'nombre_busqueda': placa,
                     'timestamp': datetime.now().isoformat(),
                     'api_url': None,
                     'api_data': None,
@@ -183,11 +157,11 @@ async def main():
     """Función principal."""
     
     # Crear instancia del scraper
-    scraper = CedulaScraper()
+    scraper = VehiculoScraper()
     
     # Nombres de ejemplo a buscar
     nombres = [
-        "Herrera Martinez Byron Alexander",
+        "PSE0881",
     ]
     
     # Ejecutar scraping

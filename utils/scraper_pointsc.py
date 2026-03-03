@@ -80,62 +80,69 @@ class CedulaScraper:
             
             print(f"✓ Cédula '{cedula}' ingresada")
 
+            # Capturar respuestas de APIs (con cookies y headers del navegador)
+            captured_response = {}
             
-            # Paso 5.5: Probar ambas APIs y devolver la que funciona
-            print("🔍 Paso 5.5: Probando APIs...")
-            captured_urls = []
-            
-            def handle_request(request):
-                # Solo capturar los APIs del sitio deseado
-                if api_base in request.url:
-                    captured_urls.append(request.url)
-                    print(f"   📡 API detectado: {request.url}")
-            
-            # Registrar listener para todas las requests
-            page.on("request", handle_request)
+            def handle_response(response):
+                # Capturar solo el API que nos interesa
+                if api_base in response.url:
+                    captured_response['url'] = response.url
+                    captured_response['status'] = response.status
+                    captured_response['response'] = response
+                    print(f"   📡 API detectado: {response.url}")
+
+            # Registrar listener ANTES de hacer click
+            page.on("response", handle_response)
             
             # Hacer clic en el botón Consultar
             print("🖱️  Haciendo clic en 'Consultar'...")
             await page.get_by_role("button", name="Consultar").click()
-            await asyncio.sleep(1.5)
             
-            # Probar los APIs capturados
+            # Esperar un poco para asegurar que la respuesta se ha capturado
+            await asyncio.sleep(2)
+            
+            # Procesar la respuesta capturada
             working_api = None
-            if captured_urls:
-                print("🧪 Probando APIs capturados:")
-                for api_url in captured_urls:
-                    try:
-                        print(f"   Intentando: {api_url}")
-                        response = await page.request.get(api_url)
-                        if response.status == 200:
+            if captured_response:
+                print("🧪 Procesando respuesta capturada:")
+                try:
+                    response = captured_response['response']
+                    print(f"   Intentando: {captured_response['url']}")
+                    
+                    if captured_response['status'] == 200:
+                        try:
+                            # Intentar JSON primero
+                            data = await response.json()
+                            if data:
+                                print(f"   ✓ API funcionando (JSON): {captured_response['url']}")
+                                working_api = {
+                                    'url': captured_response['url'],
+                                    'status': captured_response['status'],
+                                    'data': data,
+                                    'type': 'json'
+                                }
+                        except:
+                            # Si no es JSON, obtener como texto con manejo de encoding
                             try:
-                                # Intentar JSON primero
-                                data = await response.json()
-                                if data:
-                                    print(f"   ✓ API funcionando (JSON): {api_url}")
-                                    working_api = {
-                                        'url': api_url,
-                                        'status': response.status,
-                                        'data': data,
-                                        'type': 'json'
-                                    }
-                                    break
+                                # Intentar Latin-1 primero (encoding común en servidores ecuatorianos)
+                                body = await response.body()
+                                text_data = body.decode('latin-1', errors='replace')
                             except:
-                                # Si no es JSON, obtener como texto
+                                # Si falla, intentar UTF-8
                                 text_data = await response.text()
-                                if text_data and len(text_data) > 50:  # Si tiene contenido significativo
-                                    print(f"   ✓ API funcionando (HTML/Texto): {api_url}")
-                                    working_api = {
-                                        'url': api_url,
-                                        'status': response.status,
-                                        'data': text_data[:200],  # Primeros 200 caracteres
-                                        'type': 'html'
-                                    }
-                                    break
-                                else:
-                                    print(f"   ✗ Respuesta vacía: {api_url}")
-                    except Exception as e:
-                        print(f"   ✗ Error en API: {e}")
+                            
+                            if text_data and len(text_data) > 10:  # Si tiene contenido significativo
+                                print(f"   ✓ API funcionando (HTML/Texto): {captured_response['url']}")
+                                working_api = {
+                                    'url': captured_response['url'],
+                                    'status': captured_response['status'],
+                                    'data': text_data,
+                                    'type': 'html'
+                                }
+                            else:
+                                print(f"   ✗ Respuesta vacía: {captured_response['url']}")
+                except Exception as e:
+                    print(f"   ✗ Error procesando respuesta: {e}")
             
             if working_api:
                 print(f"\n✓ API válida encontrada:")

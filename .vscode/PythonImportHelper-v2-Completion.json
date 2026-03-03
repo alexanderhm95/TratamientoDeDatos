@@ -138,6 +138,14 @@
         "documentation": {}
     },
     {
+        "label": "VehiculoScraper",
+        "importPath": "utils.scraper_vehiculo",
+        "description": "utils.scraper_vehiculo",
+        "isExtraImport": true,
+        "detail": "utils.scraper_vehiculo",
+        "documentation": {}
+    },
+    {
         "label": "jwt",
         "kind": 6,
         "isExtraImport": true,
@@ -160,6 +168,14 @@
         "description": "flask_bcrypt",
         "isExtraImport": true,
         "detail": "flask_bcrypt",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
         "documentation": {}
     },
     {
@@ -259,6 +275,14 @@
         "importPath": "re",
         "description": "re",
         "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "async_playwright",
+        "importPath": "playwright.async_api",
+        "description": "playwright.async_api",
+        "isExtraImport": true,
+        "detail": "playwright.async_api",
         "documentation": {}
     },
     {
@@ -398,6 +422,15 @@
         "importPath": "services.scraper_routes",
         "description": "services.scraper_routes",
         "peekOfCode": "def buscar_cedula():\n    \"\"\"\n    Búsqueda de cédula por nombre.\n    Datos esperados:\n    {\n        \"nombre\": \"Juan Pérez González\"\n    }\n    Respuesta exitosa:\n    {\n        \"api_url\": \"https://srienlinea.sri.gob.ec/...\",",
+        "detail": "services.scraper_routes",
+        "documentation": {}
+    },
+    {
+        "label": "buscar_vehiculo",
+        "kind": 2,
+        "importPath": "services.scraper_routes",
+        "description": "services.scraper_routes",
+        "peekOfCode": "def buscar_vehiculo():\n    \"\"\"\n    Búsqueda de información de vehículo por placa.\n    Datos esperados:\n    {\n        \"placa\": \"PSE0881\"\n    }\n    Respuesta exitosa:\n    {\n        \"api_url\": \"https://servicios.axiscloud.ec/...\",",
         "detail": "services.scraper_routes",
         "documentation": {}
     },
@@ -813,6 +846,15 @@
         "description": "utils.scraper_pointsc",
         "peekOfCode": "class CedulaScraper:\n    \"\"\"Scraper para la página de consulta de cédulas de Registro Civil de Ecuador.\"\"\"\n    def __init__(self):\n        self.url = \"https://www.ecuadorlegalonline.com/consultas/agencia-nacional-de-transito/consultar-puntos-de-licencia/\"\n        self.results = []\n    async def scrape_cedula(self, cedula):\n        \"\"\"\n        Scrapea la información de una persona por su cédula.\n        Args:\n            cedula: Cédula de la persona (ej: 1720000001)",
         "detail": "utils.scraper_pointsc",
+        "documentation": {}
+    },
+    {
+        "label": "VehiculoScraper",
+        "kind": 6,
+        "importPath": "utils.scraper_vehiculo",
+        "description": "utils.scraper_vehiculo",
+        "peekOfCode": "class VehiculoScraper:\n    \"\"\"Scraper para la página de consulta de vehículos del Registro Civil de Ecuador.\"\"\"\n    def __init__(self):\n        self.url = \"https://servicios.axiscloud.ec/CRV/?ps_empresa=05\"\n        self.results = []\n    async def scrape_cedula(self, placa):\n        \"\"\"\n        Scrapea la información de un vehículo por su placa.\n        Args:\n            placa: Placa del vehículo (ej: PSE0881)",
+        "detail": "utils.scraper_vehiculo",
         "documentation": {}
     },
     {

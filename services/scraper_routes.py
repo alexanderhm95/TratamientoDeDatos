@@ -3,6 +3,7 @@ from flask_jwt_extended import jwt_required
 import asyncio
 import requests
 from utils.scraper_cedulan import CedulaScraper
+from utils.scraper_vehiculo import VehiculoScraper
 
 services_bp = Blueprint('services', __name__, url_prefix='/api')
 
@@ -91,6 +92,70 @@ def buscar_cedula():
         else:
             return jsonify({
                 'error': 'No se pudo procesar la búsqueda',
+                'estado': resultado['estado']
+            }), 500
+            
+    except Exception as e:
+        return jsonify({'error': f'Error al procesar: {str(e)}'}), 500
+
+@services_bp.route('/buscar-vehiculo', methods=['POST'])
+def buscar_vehiculo():
+    """
+    Búsqueda de información de vehículo por placa.
+    
+    Datos esperados:
+    {
+        "placa": "PSE0881"
+    }
+    
+    Respuesta exitosa:
+    {
+        "api_url": "https://servicios.axiscloud.ec/...",
+        "vehiculo": {...datos completos...},
+        "placa_buscada": "PSE0881",
+        "timestamp": "..."
+    }
+    """
+    try:
+        data = request.get_json()
+        placa = data.get('placa', '').strip().upper()
+        
+        if not placa:
+            return jsonify({'error': 'La placa es requerida'}), 400
+        
+        if len(placa) < 3:
+            return jsonify({'error': 'La placa debe tener al menos 3 caracteres'}), 400
+        
+        # Ejecutar el scraper vehicular
+        scraper = VehiculoScraper()
+        resultado = asyncio.run(scraper.scrape_cedula(placa))
+        
+        if resultado['estado'] == 'exitoso':
+            # Procesar la respuesta
+            api_data = resultado['api_data']
+            
+            # Si es string (HTML), intentar parsear como JSON
+            if isinstance(api_data, str):
+                import re
+                # Buscar JSON en la respuesta
+                json_match = re.search(r'\{.*\}', api_data, re.DOTALL)
+                if json_match:
+                    try:
+                        import json as jsonlib
+                        api_data = jsonlib.loads(json_match.group())
+                    except:
+                        pass
+            
+            return jsonify({
+                'api_url': resultado['api_url'],
+                'vehiculo': api_data,
+                'placa_buscada': placa,
+                'timestamp': resultado['timestamp'],
+                'estado': 'exitoso'
+            }), 200
+        else:
+            return jsonify({
+                'error': 'No se pudo procesar la búsqueda del vehículo',
                 'estado': resultado['estado']
             }), 500
             

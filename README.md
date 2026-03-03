@@ -519,16 +519,43 @@ Ejemplos:
 
 ---
 
-## 📄 Licencia
-Proyecto educativo - Técnico Superior en Análisis de Datos (MCITD 2026)
+## � Evidencia - Servicios de Web Scraping Implementados
+
+### 🔍 Servicio 1: Búsqueda de Cédula por Nombre
+**Descripción:** API que permite buscar cédulas de identidad de personas por nombre utilizando web scraping del SRI (Servicio de Rentas Internas).
+
+**Evidencia de ejecución:**
+
+#### ANDY FERNANDO MOSQUERA CASAMIN
+![Servicio 1 - AM](evidencia/Servicio1_AM.png)
+
+#### BYRON ALEXANDER HERRERA MARTINEZ
+![Servicio 1 - BH](evidencia/Servicio1_BH.png)
+
+#### LUIS EDUARDO CHILES QUIÑONEZ
+![Servicio 1 - LC](evidencia/Servicio1_LC.png)
 
 ---
 
-## 📞 Contacto & Preguntas
-Para consultas sobre la construcción del API o web scraping:
-📧 Contactar al **Profesor CARLOS ALBERTO VINTIMILLA CARRASCO**
+### 🚗 Servicio 2: Búsqueda de Información Vehicular
+**Descripción:** API que consume información de vehículos por placa del Registro Civil de Ecuador (CRV), interceptando respuestas de APIs externas mediante Playwright y capturando datos completos del vehículo.
 
----
+**Características:**
+- Búsqueda por placa vehicular
+- Extracción de datos de identificación (VIN, Motor)
+- Información del modelo (Marca, Modelo, Año)
+- Características vehiculares (Tipo, Color, Peso)
+- Estado de registro (CRV, Retención)
+- Información de revisión técnica
 
-**Última actualización:** 2 de marzo de 2026  
-**Estado:** Desarrollo completado y listo para evaluación
+**Evidencia de ejecución:**
+
+#### ANDY FERNANDO MOSQUERA CASAMIN
+![Servicio 2 - AM](evidencia/Servicio2_AM.png)
+
+#### BYRON ALEXANDER HERRERA MARTINEZ
+![Servicio 2 - BH](evidencia/Servicio2_BH.png)
+
+#### LUIS EDUARDO CHILES QUIÑONEZ
+![Servicio 2 - LC](evidencia/Servicio2_LC.png)
+
