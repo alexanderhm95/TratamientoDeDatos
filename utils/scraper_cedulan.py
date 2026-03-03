@@ -34,7 +34,7 @@ class CedulaScraper:
         Returns:
             Diccionario con la información de la persona
         """
-        api_base = "https://srienlinea.sri.gob.ec/movil-servicios/api/"
+        api_base = "https://apps.ecuadorlegalonline.com/modulo/consultar-cedulanombre.php?nombres"
 
         async with async_playwright() as p:
             # Paso 1: Descargar y lanzar navegador
