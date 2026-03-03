@@ -12,10 +12,14 @@ import string
 
 user_bp = Blueprint('user', __name__)
 
-# Importar limiter desde app
+# Importar limiter y cache desde app
 def get_limiter():
     from app import limiter
     return limiter
+
+def get_cache():
+    from app import cache
+    return cache
 
 """
 Ruta raíz que redirige a login o home según si está autenticado.
@@ -67,9 +71,11 @@ def create_user_route():
 """
 Ruta para listar todos los usuarios. Esta ruta responde a solicitudes GET y devuelve una lista de todos los usuarios en la base de datos en formato JSON.
 RATE LIMIT: 30 intentos por hora
+CACHING: 5 minutos (300 segundos) para mejorar rendimiento
 """
 @user_bp.route('/api/users', methods=['GET'])
 @get_limiter().limit("30 per hour")  # Max 30 solicitudes por hora por IP
+@get_cache().cached(timeout=300)  # Cache de 5 minutos
 def list_users_route():
     users = list_users()
     return jsonify([user.to_dict() for user in users])

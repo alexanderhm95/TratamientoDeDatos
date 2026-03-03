@@ -3,6 +3,7 @@ from flask_jwt_extended import JWTManager
 from flask_mail import Mail
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from flask_caching import Cache
 from datetime import datetime
 from config import Config
 from user.models import User, db, bcrypt
@@ -17,6 +18,7 @@ limiter = Limiter(
     default_limits=["200 per day", "50 per hour"],
     storage_uri="memory://"
 )
+cache = Cache(config={'CACHE_TYPE': 'simple'})
 
 
 def create_app():
@@ -36,6 +38,7 @@ def create_app():
     jwt.init_app(app)
     mail.init_app(app)
     limiter.init_app(app)
+    cache.init_app(app)
 
     with app.app_context():
         db.create_all()  # Crea las tablas en la base de datos

@@ -343,6 +343,14 @@
         "documentation": {}
     },
     {
+        "label": "Cache",
+        "importPath": "flask_caching",
+        "description": "flask_caching",
+        "isExtraImport": true,
+        "detail": "flask_caching",
+        "documentation": {}
+    },
+    {
         "label": "Config",
         "importPath": "config",
         "description": "config",
@@ -538,7 +546,16 @@
         "kind": 2,
         "importPath": "user.routes",
         "description": "user.routes",
-        "peekOfCode": "def get_limiter():\n    from app import limiter\n    return limiter\n\"\"\"\nRuta raíz que redirige a login o home según si está autenticado.\n\"\"\"\n@user_bp.route('/', methods=['GET'])\ndef index():\n    # La redirección se maneja en JavaScript del cliente según el token en localStorage\n    return redirect(url_for('user.home'))",
+        "peekOfCode": "def get_limiter():\n    from app import limiter\n    return limiter\ndef get_cache():\n    from app import cache\n    return cache\n\"\"\"\nRuta raíz que redirige a login o home según si está autenticado.\n\"\"\"\n@user_bp.route('/', methods=['GET'])",
+        "detail": "user.routes",
+        "documentation": {}
+    },
+    {
+        "label": "get_cache",
+        "kind": 2,
+        "importPath": "user.routes",
+        "description": "user.routes",
+        "peekOfCode": "def get_cache():\n    from app import cache\n    return cache\n\"\"\"\nRuta raíz que redirige a login o home según si está autenticado.\n\"\"\"\n@user_bp.route('/', methods=['GET'])\ndef index():\n    # La redirección se maneja en JavaScript del cliente según el token en localStorage\n    return redirect(url_for('user.home'))",
         "detail": "user.routes",
         "documentation": {}
     },
@@ -637,7 +654,7 @@
         "kind": 5,
         "importPath": "user.routes",
         "description": "user.routes",
-        "peekOfCode": "user_bp = Blueprint('user', __name__)\n# Importar limiter desde app\ndef get_limiter():\n    from app import limiter\n    return limiter\n\"\"\"\nRuta raíz que redirige a login o home según si está autenticado.\n\"\"\"\n@user_bp.route('/', methods=['GET'])\ndef index():",
+        "peekOfCode": "user_bp = Blueprint('user', __name__)\n# Importar limiter y cache desde app\ndef get_limiter():\n    from app import limiter\n    return limiter\ndef get_cache():\n    from app import cache\n    return cache\n\"\"\"\nRuta raíz que redirige a login o home según si está autenticado.",
         "detail": "user.routes",
         "documentation": {}
     },
@@ -871,7 +888,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "jwt = JWTManager()\nmail = Mail()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\"\n)\ndef create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config",
+        "peekOfCode": "jwt = JWTManager()\nmail = Mail()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\"\n)\ncache = Cache(config={'CACHE_TYPE': 'simple'})\ndef create_app():\n    app = Flask(__name__)",
         "detail": "app",
         "documentation": {}
     },
@@ -880,7 +897,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "mail = Mail()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\"\n)\ndef create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config\n    app.config.from_object(Config)",
+        "peekOfCode": "mail = Mail()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\"\n)\ncache = Cache(config={'CACHE_TYPE': 'simple'})\ndef create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config",
         "detail": "app",
         "documentation": {}
     },
@@ -889,7 +906,16 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "limiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\"\n)\ndef create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config\n    app.config.from_object(Config)\n    # Registro del blueprint de rutas de usuario",
+        "peekOfCode": "limiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\"\n)\ncache = Cache(config={'CACHE_TYPE': 'simple'})\ndef create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config\n    app.config.from_object(Config)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "cache",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "cache = Cache(config={'CACHE_TYPE': 'simple'})\ndef create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config\n    app.config.from_object(Config)\n    # Registro del blueprint de rutas de usuario\n    app.register_blueprint(user_bp)\n    # Registro del blueprint de servicios\n    app.register_blueprint(services_bp)\n    # Inicialización de la base de datos y JWT",
         "detail": "app",
         "documentation": {}
     },
