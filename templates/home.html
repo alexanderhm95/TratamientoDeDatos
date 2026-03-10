@@ -93,6 +93,77 @@
                         <!-- Sin resultados -->
                         <div id="sinResultados" class="alert alert-warning mt-4" style="display:none;">
                             ℹ️ No se encontraron cédulas para ese nombre.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SERVICIO 2: BÚSQUEDA DE INFORMACIÓN VEHICULAR -->
+        <div id="serviciosVehiculo" class="row mt-5">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">🚗 Servicio 2: Búsqueda de Información Vehicular</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Formulario de búsqueda -->
+                        <form id="formBuscarVehiculo">
+                            <div class="mb-3">
+                                <label for="placaBusqueda" class="form-label">Ingresa la placa del vehículo:</label>
+                                <input type="text" class="form-control text-uppercase" id="placaBusqueda" placeholder="Ej: PSE0881" required>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100" id="btnBuscarVehiculo">
+                                <span id="btnTextVehiculo">🚗 Buscar Vehículo</span>
+                                <span id="btnSpinnerVehiculo" class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true" style="display:none;"></span>
+                            </button>
+                        </form>
+
+                        <!-- Alert para mensajes -->
+                        <div id="alertBusquedaVehiculo" class="mt-3" style="display:none;"></div>
+
+                        <!-- Resultados -->
+                        <div id="resultadosVehiculo" class="mt-4" style="display:none;">
+                            <h6 class="border-bottom pb-2">📋 Información del Vehículo:</h6>
+                            
+                            <!-- Info del API -->
+                            <div class="alert alert-info">
+                                <small><strong>API:</strong> <a id="apiUrlVehiculo" href="#" target="_blank">Ver API</a></small>
+                            </div>
+
+                            <!-- Datos de Identificación -->
+                            <div class="mb-4">
+                                <h6 class="bg-light p-2 rounded">🔑 Datos de Identificación</h6>
+                                <div id="datosIdentificacion" class="row"></div>
+                            </div>
+
+                            <!-- Datos del Modelo -->
+                            <div class="mb-4">
+                                <h6 class="bg-light p-2 rounded">📦 Datos del Modelo</h6>
+                                <div id="datosModelo" class="row"></div>
+                            </div>
+
+                            <!-- Otras Características -->
+                            <div class="mb-4">
+                                <h6 class="bg-light p-2 rounded">🎨 Otras Características</h6>
+                                <div id="otrasCaracteristicas" class="row"></div>
+                            </div>
+
+                            <!-- Información de CRV -->
+                            <div class="mb-4">
+                                <h6 class="bg-light p-2 rounded">📄 Información CRV</h6>
+                                <div id="infoCrv" class="row"></div>
+                            </div>
+
+                            <!-- Información de Revisión -->
+                            <div class="mb-4">
+                                <h6 class="bg-light p-2 rounded">✅ Información de Revisión</h6>
+                                <div id="infoRevision" class="row"></div>
+                            </div>
+                        </div>
+
+                        <!-- Sin resultados -->
+                        <div id="sinResultadosVehiculo" class="alert alert-warning mt-4" style="display:none;">
+                            ℹ️ No se encontró información para esa placa.
                         </div>
                     </div>
                 </div>
@@ -250,6 +321,128 @@
                 btnText.style.display = 'inline';
                 btnSpinner.style.display = 'none';
             }
+        });
+
+        // SERVICIO 2: Búsqueda de información vehicular
+        document.getElementById('formBuscarVehiculo').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const placa = document.getElementById('placaBusqueda').value.trim().toUpperCase();
+            const btnBuscar = document.getElementById('btnBuscarVehiculo');
+            const btnText = document.getElementById('btnTextVehiculo');
+            const btnSpinner = document.getElementById('btnSpinnerVehiculo');
+            const alertDiv = document.getElementById('alertBusquedaVehiculo');
+            const resultadosDiv = document.getElementById('resultadosVehiculo');
+            const sinResultadosDiv = document.getElementById('sinResultadosVehiculo');
+            
+            // Limpiar previos
+            alertDiv.style.display = 'none';
+            resultadosDiv.style.display = 'none';
+            sinResultadosDiv.style.display = 'none';
+            
+            // Mostrar spinner
+            btnBuscar.disabled = true;
+            btnText.style.display = 'none';
+            btnSpinner.style.display = 'inline-block';
+            
+            try {
+                const response = await fetch('/api/buscar-vehiculo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify({ placa })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.estado === 'exitoso') {
+                    // Mostrar API
+                    document.getElementById('apiUrlVehiculo').href = data.api_url;
+                    document.getElementById('apiUrlVehiculo').textContent = data.api_url;
+                    
+                    // Procesar datos del vehículo
+                    const vehiculo = data.vehiculo;
+                    
+                    // Parsear campos JSON si es string
+                    let campos = {};
+                    if (typeof vehiculo === 'string') {
+                        try {
+                            campos = JSON.parse(vehiculo);
+                        } catch (e) {
+                            campos = vehiculo;
+                        }
+                    } else if (vehiculo.campos) {
+                        try {
+                            campos = typeof vehiculo.campos === 'string' ? JSON.parse(vehiculo.campos) : vehiculo.campos;
+                        } catch (e) {
+                            campos = vehiculo.campos;
+                        }
+                    } else {
+                        campos = vehiculo;
+                    }
+                    
+                    // Función para mostrar lista de datos
+                    function mostrarListaDatos(selector, datos) {
+                        const container = document.getElementById(selector);
+                        container.innerHTML = '';
+                        
+                        if (Array.isArray(datos)) {
+                            datos.forEach(item => {
+                                const col = document.createElement('div');
+                                col.className = 'col-md-6 mb-2';
+                                col.innerHTML = `
+                                    <div class="card card-sm">
+                                        <div class="card-body p-2">
+                                            <small class="text-muted"><strong>${item.etiqueta}</strong></small><br>
+                                            <span>${item.valor || 'N/A'}</span>
+                                        </div>
+                                    </div>
+                                `;
+                                container.appendChild(col);
+                            });
+                        }
+                    }
+                    
+                    // Mostrar secciones
+                    if (campos.lsDatosIdentificacion) {
+                        mostrarListaDatos('datosIdentificacion', campos.lsDatosIdentificacion);
+                    }
+                    if (campos.lsDatosModelo) {
+                        mostrarListaDatos('datosModelo', campos.lsDatosModelo);
+                    }
+                    if (campos.lsOtrasCaracteristicas) {
+                        mostrarListaDatos('otrasCaracteristicas', campos.lsOtrasCaracteristicas);
+                    }
+                    if (campos.lsCrv) {
+                        mostrarListaDatos('infoCrv', campos.lsCrv);
+                    }
+                    if (campos.lsRevision) {
+                        mostrarListaDatos('infoRevision', campos.lsRevision);
+                    }
+                    
+                    resultadosDiv.style.display = 'block';
+                } else {
+                    alertDiv.className = 'alert alert-danger';
+                    alertDiv.innerHTML = `<strong>Error:</strong> ${data.error || 'No se pudo procesar la búsqueda'}`;
+                    alertDiv.style.display = 'block';
+                }
+            } catch (error) {
+                alertDiv.className = 'alert alert-danger';
+                alertDiv.innerHTML = `<strong>Error:</strong> ${error.message}`;
+                alertDiv.style.display = 'block';
+            } finally {
+                // Ocultar spinner
+                btnBuscar.disabled = false;
+                btnText.style.display = 'inline';
+                btnSpinner.style.display = 'none';
+            }
+        });
+
+        // Hacer mayúscula automáticamente el input de placa
+        document.getElementById('placaBusqueda').addEventListener('input', (e) => {
+            e.target.value = e.target.value.toUpperCase();
         });
 
         // Verificar autenticación al cargar la página

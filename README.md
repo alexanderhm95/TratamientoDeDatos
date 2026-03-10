@@ -76,28 +76,7 @@ API RESTful completa para gestión de usuarios con **autenticación JWT**, **web
 
 ---
 
-## Respuesta a Preguntas del Profesor
-
-### 1. ¿Qué consideraciones de arquitectura para escalar con usuarios crecientes?
-
-**Horizontal Scaling & Distribuido:**
-- **Cache Distribuido**: Migrar de memoria local a **Redis** para compartir cache entre múltiples instancias
-  ```
-  storage_uri="redis://localhost:6379" en lugar de "memory://"
-  ```
-- **Database Read Replicas**: Usar replicas de lectura en PostgreSQL/Cloud SQL para distribuir carga
-- **Load Balancing**: Implementar Nginx o Cloud Load Balancer
-- **Microservicios**: Separar scraping (workers celery) del API principal
-- **CDN para Frontend**: Servir assets estáticos desde CloudFront/Cloudflare
-- **Message Queue**: Implementar RabbitMQ/Celery para scraping asincrónico
-
-**Costo Operativo:**
-- Usar **Cloud Functions** para scraping bajo demanda (pago por uso)
-- **Auto-scaling** en Cloud Run basado en CPU/memoria
-- **Data compression** en responses JSON
-- **Lazy loading** de datos en frontend
-
-### 2. ¿Qué consideraciones para prevenir ataques de integridad e infiltración?
+## Mejoras aplicadas
 
 **Seguridad Implementada:**
 - ✅ **Rate Limiting**: Previene fuerza bruta en login/registro
@@ -107,51 +86,6 @@ API RESTful completa para gestión de usuarios con **autenticación JWT**, **web
 - ✅ **Validación de Input**: Regex en emails, usernames, passwords
 - ✅ **SQL Injection Prevention**: SQLAlchemy ORM (queries parametrizadas)
 
-**Mejoras Futuras Recomendadas:**
-- **2FA (Two-Factor Authentication)**: Google Authenticator
-- **HTTPS/TLS**: Certificado SSL en producción
-- **WAF (Web Application Firewall)**: Cloud Armor en Google Cloud
-- **API Key Management**: Secrets Manager (Google Cloud Secret Manager)
-- **Audit Logging**: Registrar todos los accesos y cambios
-- **OWASP Top 10**: Validación contra ataques XSS, CSRF
-- **Database Encryption**: Encriptar datos sensibles con AES-256
-
-### 3. ¿Qué servicio cloud preferiríamos y por qué?
-
-**Nossa Recomendación: Google Cloud Storage + Cloud SQL + Cloud Run**
-
-| Aspecto | Google Cloud | AWS | Azure |
-|--------|------------|-----|-------|
-| **Base de Datos** | Cloud SQL (PostgreSQL) | RDS | SQL Database |
-| **Ventajas** | Integración nativa, backups automáticos, replicas | Ecosistema completo, EC2 flexible | Stack Microsoft |
-| **Costo** | Bajo para startups | Complejo, muchos add-ons | Moderado |
-| **Escalabilidad** | Excelente, auto-scaling | Superior en empresas grandes | Muy bueno |
-| **Facilidad** | Muy simple, UI intuitiva | Curva de aprendizaje | Moderada |
-
-**Configuración Recomendada para nuestro proyecto:**
-```
-Google Cloud SQL (PostgreSQL)
-├─ Replicación en tiempo real
-├─ Backups automatizados diarios
-├─ Encriptación en reposo
-└─ Failover automático
-
-Cloud Run (API Container)
-├─ Auto-scaling basado en tráfico
-├─ HTTPS automático
-├─ Pago por solicitud (0 cuando no hay tráfico)
-
-Cloud Storage (Assets/Logs)
-├─ Servir Frontend estático
-├─ Logs de auditoría
-```
-
-**Vs Local:**
-- ✅ **Disponibilidad**: 99.99% uptime garantizado
-- ✅ **Seguridad**: Encriptación, backups, DDoS protection
-- ✅ **Escalabilidad**: Crece automáticamente
-- ❌ **Costo inicial**: Mayor que servidor local
-- ❌ **Vendor lock-in**: Migración compleja
 
 ---
 
@@ -187,62 +121,240 @@ Cloud Storage (Assets/Logs)
 ## Estructura del Proyecto
 ```
 TratamientoDeDatos/
-├── app.py                  # Aplicación principal con inicialización de extensiones
-├── config.py               # Configuración de Flask y extensiones
-├── requirements.txt        # Dependencias del proyecto
-├── Dockerfile              # Configuración para Docker
-├── docker-compose.yaml     # Orquestación de servicios
-├── user/                   # Módulo de autenticación
-│   ├── models.py          # Modelo de Usuario (SQLAlchemy)
-│   ├── routes.py          # Endpoints de usuarios (/api/users, /api/login, /api/forgot-password)
-│   ├── service.py         # Lógica de negocio (crear usuario, login, etc)
-│   ├── validators.py      # Validaciones de email, username, password
-│   ├── exceptions.py      # Excepciones personalizadas
-│   └── test.py            # Tests automatizados
-├── utils/                 # Herramientas y scrapers
-│   ├── scraper_cedulan.py # Web scraper para búsqueda de cédulas (Playwright)
-│   └── scraper_placar.py  # Web scraper para placas vehiculares
-├── services/              # Servicios complementarios
-│   └── scraper_routes.py  # Endpoints de scraping (/api/verificar-api-cedula, /api/buscar-cedula)
-├── templates/             # Frontend
-│   ├── home.html          # Dashboard autenticado con búsqueda de cédulas
+├── app.py                      # Aplicación principal con inicialización de extensiones (Flask, JWT, Cache, Limiter)
+├── config.py                   # Configuración de Flask y extensiones
+├── requirements.txt            # Dependencias del proyecto (Flask, JWT, Caching, Limiter, Playwright, etc)
+├── install_playwright_browsers.py  # Script para instalar navegadores Playwright
+├── Dockerfile                  # Configuración para Docker
+├── docker-compose.yaml         # Orquestación de servicios
+├── app.db                      # Base de datos SQLite (usuarios)
+├── .env                        # Variables de entorno (secretas)
+│
+├── user/                       # 🔐 Módulo de autenticación y usuarios
+│   ├── __init__.py
+│   ├── models.py              # Modelo de Usuario (SQLAlchemy)
+│   ├── routes.py              # Endpoints de autenticación (@cache.cached, @limiter.limit)
+│   │                          # POST /api/users (registro, rate limit 5/min)
+│   │                          # GET /api/users (listar, CACHED 5min, rate limit 30/hora)
+│   │                          # POST /api/login (login, rate limit 5/min)
+│   │                          # POST /api/forgot-password (recuperar contraseña, rate limit 3/hora)
+│   ├── service.py             # Lógica de negocio (crear usuario, login, validaciones)
+│   ├── validators.py          # Validaciones con regex (email, username, password)
+│   ├── exceptions.py          # Excepciones personalizadas
+│   ├── test.py                # Tests unitarios
+│   └── __pycache__/
+│
+├── services/                   # 🌐 Servicios de scraping y APIs externas
+│   ├── __init__.py
+│   ├── scraper_routes.py      # Endpoints de web scraping
+│   │                          # GET /api/verificar-api-cedula (verificar disponibilidad SRI)
+│   │                          # POST /api/buscar-cedula (buscar cédula por nombre, auth requerida)
+│   │                          # POST /api/buscar-vehiculo (buscar vehículo por placa, auth requerida)
+│   └── __pycache__/
+│
+├── utils/                      # 🔧 Herramientas y web scrapers con Playwright
+│   ├── scraper_cedulan.py     # Scraper para búsqueda de cédulas (SRI)
+│   │                          # Clase: CedulaScraper
+│   │                          # Método: scrape_cedula(nombre)
+│   │                          # Captura: APIs del SRI, parsea respuestas JSON
+│   │
+│   ├── scraper_vehiculo.py    # Scraper para información vehicular (CRV)
+│   │                          # Clase: VehiculoScraper
+│   │                          # Método: scrape_cedula(placa)
+│   │                          # Captura: Datos completos del vehículo
+│   │
+│   ├── scraper_placar.py      # Scraper para propietarios por placa (ANT)
+│   │                          # Clase: VehicleScraperANT
+│   │                          # Método: scrape_vehicle(placa)
+│   │
+│   ├── scraper_pointsc.py     # Scraper para puntos de licencia
+│   │                          # Clase: CedulaScraper
+│   │                          # Método: scrape_cedula(cedula)
+│   │
+│   └── __pycache__/
+│
+├── templates/                  # 📄 Frontend HTML con Bootstrap 5.3.2
+│   ├── home.html              # Dashboard autenticado (búsqueda cédulas + vehículos)
+│   │                          # Formulario de búsqueda de cédulas
+│   │                          # Formulario de búsqueda vehicular (placa)
+│   │                          # Muestra resultados con datos completos
+│   │
 │   ├── auth/
-│   │   ├── auth.html      # Formulario de login
-│   │   ├── register.html  # Formulario de registro
-│   │   └── forgot-password.html  # Recuperación de contraseña
-├── static/                # Archivos estáticos
-│   └── js/alerts.js       # Manejo de alertas con auto-cierre
-└── RATE_LIMIT_CACHE.md    # Documentación de rate limiting y caching
+│   │   ├── auth.html          # Formulario de login
+│   │   ├── register.html      # Formulario de registro con validaciones
+│   │   └── forgot-password.html  # Recuperación de contraseña por email
+│   │
+│   ├── js/
+│   │   └── alerts.js          # Manejo de alertas con auto-cierre
+│   │
+│   └── user/
+│       └── createuser.html    # Página de creación de usuario
+│
+├── static/                     # 🎨 Archivos estáticos
+│   ├── js/
+│   │   └── alerts.js          # Funciones de alerta (auto-cierre, estilos)
+│   └── [otros assets CSS/JS]
+│
+├── evidencia/                  # 📸 Capturas de pantalla de pruebas
+│   ├── Servicio1_AM.png       # Búsqueda cédula - ANDY MOSQUERA
+│   ├── Servicio1_BH.png       # Búsqueda cédula - BYRON HERRERA
+│   ├── Servicio1_LC.png       # Búsqueda cédula - LUIS CHILES
+│   ├── Servicio2_AM.png       # Búsqueda vehículo - ANDY MOSQUERA
+│   ├── Servicio2_BH.png       # Búsqueda vehículo - BYRON HERRERA
+│   ├── Servicio2_LC.png       # Búsqueda vehículo - LUIS CHILES
+│   ├── branch.png             # Control de versiones Git
+│   ├── buildDocker.png        # Construcción de imagen Docker
+│   ├── cloud.png              # Despliegue en Google Cloud
+│   ├── cloud2.png             # Dashboard de Google Cloud
+│   ├── createUser.png         # Prueba: crear usuario
+│   ├── docker.png             # Contenedor Docker ejecutándose
+│   ├── health.png             # Prueba: health check API
+│   ├── listUsers.png          # Prueba: listar usuarios
+│   ├── localhost.png          # API corriendo en localhost
+│   └── login.png              # Prueba: login de usuario
+│
+└── __pycache__/               # Cache de Python (compilado bytecode)
 
 ---
 
 ## Endpoints Disponibles
 
 ### 🔐 Autenticación
-| Método | Endpoint | Auth | Rate Limit | Descripción |
-|--------|----------|------|-----------|-------------|
-| POST | `/api/users` | ❌ | 5/min | Registro de nuevo usuario |
-| POST | `/api/login` | ❌ | 5/min | Login y obtener JWT token |
-| POST | `/api/forgot-password` | ❌ | 3/hora | Recuperar contraseña por email |
-| GET | `/api/users` | ❌ | 30/hora | Listar usuarios (cached 5min) |
+| Método | Endpoint | Auth | Rate Limit | Cache | Descripción |
+|--------|----------|------|-----------|-------|-------------|
+| POST | `/api/users` | ❌ | 5/min | ❌ | Registro de nuevo usuario |
+| POST | `/api/login` | ❌ | 5/min | ❌ | Login y obtener JWT token |
+| POST | `/api/forgot-password` | ❌ | 3/hora | ❌ | Recuperar contraseña por email |
+| GET | `/api/users` | ❌ | 30/hora | ✅ 5min | Listar usuarios (cached) |
 
-### 🔎 Web Scraping
+### 🔎 Web Scraping - Cédulas
+| Método | Endpoint | Auth | Cache | Descripción |
+|--------|----------|------|-------|-------------|
+| GET | `/api/verificar-api-cedula` | ❌ | ❌ | Verificar disponibilidad de API SRI |
+| POST | `/api/buscar-cedula` | ✅ | ❌ | Buscar cédula por nombre (Playwright) |
+
+**Request:**
+```json
+{
+  "nombre": "Juan Pérez González"
+}
+```
+
+**Response:**
+```json
+{
+  "api_url": "https://apps.ecuadorlegalonline.com/modulo/consultar-cedulanombre.php?nombres=...",
+  "cedulas": [
+    {
+      "identificacion": "0123456789",
+      "nombreComercial": "JUAN PÉREZ GONZÁLEZ",
+      "tipo": "PERSONA NATURAL",
+      "clase": "NACIONAL"
+    }
+  ],
+  "nombre_buscado": "Juan Pérez González",
+  "timestamp": "2026-03-03T10:30:45.123456"
+}
+```
+
+---
+
+### 🚗 Web Scraping - Vehículos
+| Método | Endpoint | Auth | Cache | Descripción |
+|--------|----------|------|-------|-------------|
+| POST | `/api/buscar-vehiculo` | ✅ | ❌ | Buscar información vehicular por placa (CRV) |
+
+**Request:**
+```json
+{
+  "placa": "PSE0881"
+}
+```
+
+**Response:**
+```json
+{
+  "api_url": "https://servicios.axiscloud.ec/CRV/paginas/datosVehiculo.jsp",
+  "vehiculo": {
+    "codError": "0",
+    "campos": {
+      "lsUltimaActualizacion": "",
+      "lsServicio": "USO PARTICULAR",
+      "lsPlaca": "PSE0881",
+      "lsDatosIdentificacion": [
+        {
+          "valor": "TFR16HD947104834",
+          "etiqueta": "VIN:"
+        },
+        {
+          "valor": "4ZD1315991",
+          "etiqueta": "Motor:"
+        }
+      ],
+      "lsDatosModelo": [
+        {
+          "valor": "CHEVROLET",
+          "etiqueta": "Marca:"
+        },
+        {
+          "valor": "LUV C/D 4X2 T/M",
+          "etiqueta": "Modelo:"
+        }
+      ],
+      "lsOtrasCaracteristicas": [
+        {
+          "valor": "CAMIONETA",
+          "etiqueta": "Clase Vehículo:"
+        },
+        {
+          "valor": "ROJO",
+          "etiqueta": "Color 1:"
+        }
+      ]
+    }
+  },
+  "placa_buscada": "PSE0881",
+  "timestamp": "2026-03-03T10:35:20.654321",
+  "estado": "exitoso"
+}
+```
+
+---
+
+### 🏥 Monitoreo & Salud
 | Método | Endpoint | Auth | Descripción |
 |--------|----------|------|-------------|
-| GET | `/api/verificar-api-cedula` | ❌ | Verificar disponibilidad de API SRI |
-| POST | `/api/buscar-cedula` | ✅ | Buscar cédula por nombre (Scraping) |
+| GET | `/` | ✅ | Dashboard principal (requiere autenticación JWT) |
+| GET | `/api/health` | ❌ | Estado de la API |
+| GET | `/login` | ❌ | Página de login |
+| GET | `/register` | ❌ | Página de registro |
+| GET | `/forgot-password` | ❌ | Página de recuperación de contraseña |
 
-### 🏥 Monitoreo
-| Método | Endpoint | Descripción |
-|--------|----------|-------------|
-| GET | `/` | Dashboard principal (requiere login) |
-| GET | `/api/health` | Estado de la API |
+**Response /api/health:**
+```json
+{
+  "status": "ok",
+  "message": "API is healthy"
+}
+```
 
 ---
 
 ## Ejemplos de Uso
 
-### 1. Registrar usuario
+### 1. Verificar estado de la API
+```bash
+curl http://localhost:8080/api/health
+```
+**Respuesta:**
+```json
+{
+  "status": "ok",
+  "message": "API is healthy"
+}
+```
+
+### 2. Registrar usuario
 ```bash
 curl -X POST http://localhost:8080/api/users \
   -H "Content-Type: application/json" \
@@ -252,8 +364,18 @@ curl -X POST http://localhost:8080/api/users \
     "password": "MiContraseña123!"
   }'
 ```
+**Respuesta (201 Created):**
+```json
+{
+  "user_id": 1,
+  "username": "juan123",
+  "email": "juan@ejemplo.com",
+  "role": "user",
+  "created_at": "2026-03-03T10:00:00.000000"
+}
+```
 
-### 2. Login
+### 3. Login - Obtener JWT token
 ```bash
 curl -X POST http://localhost:8080/api/login \
   -H "Content-Type: application/json" \
@@ -261,21 +383,139 @@ curl -X POST http://localhost:8080/api/login \
     "username": "juan123",
     "password": "MiContraseña123!"
   }'
-# Respuesta: {"access_token": "eyJhbGc..."}
+```
+**Respuesta (200 OK):**
+```json
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "token_type": "Bearer"
+}
 ```
 
-### 3. Usar token para buscar cédula
+### 4. Listar usuarios (con Cache de 5 minutos)
+```bash
+curl http://localhost:8080/api/users \
+  -H "Authorization: Bearer eyJhbGc..."
+```
+**Respuesta (200 OK):**
+```json
+[
+  {
+    "user_id": 1,
+    "username": "juan123",
+    "email": "juan@ejemplo.com",
+    "role": "user"
+  }
+]
+```
+*Nota: Las siguientes 5 minutos, esta respuesta se devuelve desde cache sin acceder a la BD*
+
+### 5. Buscar cédula por nombre (con Web Scraping)
 ```bash
 curl -X POST http://localhost:8080/api/buscar-cedula \
   -H "Authorization: Bearer eyJhbGc..." \
   -H "Content-Type: application/json" \
   -d '{"nombre": "Juan Pérez"}'
 ```
+**Respuesta (200 OK):**
+```json
+{
+  "api_url": "https://apps.ecuadorlegalonline.com/modulo/consultar-cedulanombre.php?nombres=...",
+  "cedulas": [
+    {
+      "identificacion": "0123456789",
+      "nombreComercial": "JUAN PÉREZ GARCÍA",
+      "tipo": "PERSONA NATURAL",
+      "clase": "NACIONAL"
+    }
+  ],
+  "nombre_buscado": "Juan Pérez",
+  "timestamp": "2026-03-03T10:30:45.123456"
+}
+```
 
-### 4. Verificar disponibilidad de API
+### 6. Buscar información vehicular por placa
+```bash
+curl -X POST http://localhost:8080/api/buscar-vehiculo \
+  -H "Authorization: Bearer eyJhbGc..." \
+  -H "Content-Type: application/json" \
+  -d '{"placa": "PSE0881"}'
+```
+**Respuesta (200 OK):**
+```json
+{
+  "api_url": "https://servicios.axiscloud.ec/CRV/paginas/datosVehiculo.jsp",
+  "vehiculo": {
+    "codError": "0",
+    "campos": {
+      "lsPlaca": "PSE0881",
+      "lsDatosIdentificacion": [
+        {"valor": "TFR16HD947104834", "etiqueta": "VIN:"},
+        {"valor": "4ZD1315991", "etiqueta": "Motor:"}
+      ],
+      "lsDatosModelo": [
+        {"valor": "CHEVROLET", "etiqueta": "Marca:"},
+        {"valor": "LUV C/D 4X2 T/M", "etiqueta": "Modelo:"}
+      ]
+    }
+  },
+  "placa_buscada": "PSE0881",
+  "timestamp": "2026-03-03T10:35:20.654321",
+  "estado": "exitoso"
+}
+```
+
+### 7. Verificar disponibilidad de API SRI
 ```bash
 curl http://localhost:8080/api/verificar-api-cedula
-# Respuesta: {"disponible": true, "mensaje": "API SRI activa"}
+```
+**Respuesta (200 OK):**
+```json
+{
+  "disponible": true,
+  "mensaje": "API disponible",
+  "servicio": "busqueda-cedula"
+}
+```
+
+### 8. Recuperar contraseña por email
+```bash
+curl -X POST http://localhost:8080/api/forgot-password \
+  -H "Content-Type: application/json" \
+  -d '{"email": "juan@ejemplo.com"}'
+```
+**Respuesta (200 OK):**
+```json
+{
+  "message": "Email de recuperación enviado a juan@ejemplo.com"
+}
+```
+
+---
+
+## Códigos de Error HTTP
+
+| Código | Significado | Ejemplo |
+|--------|------------|---------|
+| **200** | OK | Solicitud exitosa |
+| **201** | Created | Usuario creado exitosamente |
+| **400** | Bad Request | Datos inválidos (email mal formato, password muy corta) |
+| **401** | Unauthorized | Token JWT inválido/expirado/no proporcionado |
+| **429** | Too Many Requests | Límite de rate limit excedido |
+| **500** | Internal Server Error | Error interno del servidor |
+
+**Ejemplo de error 400:**
+```json
+{
+  "message": "El nombre de usuario debe tener entre 3 y 20 caracteres."
+}
+```
+
+**Ejemplo de error 429:**
+```json
+{
+  "message": "429 Too Many Requests: 5 per 1 minute"
+}
 ```
 
 ---
@@ -399,21 +639,7 @@ Ejemplos:
 
 4. Accede a la API desde Cloud Run (URL proporcionada en output)
 
----
 
-## Mejoras Futuras (Roadmap)
-- [ ] Implementar 2FA (Two-Factor Authentication)
-- [ ] Migrar cache a Redis para múltiples instancias
-- [ ] Usar PostgreSQL en lugar de SQLite
-- [ ] Implementar API Key management
-- [ ] Agregar audit logging de todos los accesos
-- [ ] Certificados SSL/TLS automáticos
-- [ ] Dashboard de administración (admin panel)
-- [ ] Scraper para más fuentes de datos
-- [ ] API versioning (v1, v2, etc)
-- [ ] GraphQL endpoint
-
----
 
 ## Evidencia Ejecutada
 
@@ -473,7 +699,7 @@ Ejemplos:
 
 ## 📦 Entregables Requeridos
 
-### Parte 1 - Construcción del API 
+### Parte 1- Proyecto 
 **Repositorio Principal:** [TratamientoDeDatos](https://github.com/alexanderhm95/TratamientoDeDatos)
 
 **Incluye:**
@@ -488,13 +714,7 @@ Ejemplos:
 - ✅ Respuestas JSON bien estructuradas
 - ✅ Buenas prácticas de versionamiento Git
 
-**Creatividad & Features Extra:**
-- 🚀 Sistema completo de autenticación con recuperación por email
-- 🔍 Web scraping con Playwright (detecta y testea APIs automáticamente)
-- 🛡️ Rate limiting y caching para protección
-- 📊 Validación avanzada de datos (regex)
-- 🎨 Frontend interactivo con Bootstrap
-- 📈 Logging y manejo robusto de errores
+
 
 ### Parte 2 - Web Scraping
 **Repositorio Separado:** [Scraper - Cédulas y Placas](https://github.com/alexanderhm95/TratamientoDeDatos/tree/main/utils)
@@ -509,26 +729,45 @@ Ejemplos:
 3. ✅ Detecta y testea APIs interceptadas
 4. ✅ Integrado con API (endpoint /api/buscar-cedula)
 
-**Dificultad:**
-⭐⭐⭐⭐⭐ (5/5) - Página con JavaScript dinámico, requiere:
-- Browser automation (Playwright headless)
-- Interceptación de Network requests
-- Detección automática de APIs
-- Validación de respuestas en tiempo real
-- Manejo de popups y elementos dinámicos
+---
+
+## � Evidencia - Servicios de Web Scraping Implementados
+
+### 🔍 Servicio 1: Búsqueda de Cédula por Nombre
+**Descripción:** API que permite buscar cédulas de identidad de personas por nombre utilizando web scraping del SRI (Servicio de Rentas Internas).
+
+**Evidencia de ejecución:**
+
+#### ANDY FERNANDO MOSQUERA CASAMIN
+![Servicio 1 - AM](evidencia/Servicio1_AM.png)
+
+#### BYRON ALEXANDER HERRERA MARTINEZ
+![Servicio 1 - BH](evidencia/Servicio1_BH.png)
+
+#### LUIS EDUARDO CHILES QUIÑONEZ
+![Servicio 1 - LC](evidencia/Servicio1_LC.png)
 
 ---
 
-## 📄 Licencia
-Proyecto educativo - Técnico Superior en Análisis de Datos (MCITD 2026)
+### 🚗 Servicio 2: Búsqueda de Información Vehicular
+**Descripción:** API que consume información de vehículos por placa del Registro Civil de Ecuador (CRV), interceptando respuestas de APIs externas mediante Playwright y capturando datos completos del vehículo.
 
----
+**Características:**
+- Búsqueda por placa vehicular
+- Extracción de datos de identificación (VIN, Motor)
+- Información del modelo (Marca, Modelo, Año)
+- Características vehiculares (Tipo, Color, Peso)
+- Estado de registro (CRV, Retención)
+- Información de revisión técnica
 
-## 📞 Contacto & Preguntas
-Para consultas sobre la construcción del API o web scraping:
-📧 Contactar al **Profesor CARLOS ALBERTO VINTIMILLA CARRASCO**
+**Evidencia de ejecución:**
 
----
+#### ANDY FERNANDO MOSQUERA CASAMIN
+![Servicio 2 - AM](evidencia/Servicio2_AM.png)
 
-**Última actualización:** 2 de marzo de 2026  
-**Estado:** Desarrollo completado y listo para evaluación
+#### BYRON ALEXANDER HERRERA MARTINEZ
+![Servicio 2 - BH](evidencia/Servicio2_BH.png)
+
+#### LUIS EDUARDO CHILES QUIÑONEZ
+![Servicio 2 - LC](evidencia/Servicio2_LC.png)
+

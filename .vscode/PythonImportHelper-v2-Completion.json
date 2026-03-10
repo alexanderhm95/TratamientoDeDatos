@@ -138,6 +138,14 @@
         "documentation": {}
     },
     {
+        "label": "VehiculoScraper",
+        "importPath": "utils.scraper_vehiculo",
+        "description": "utils.scraper_vehiculo",
+        "isExtraImport": true,
+        "detail": "utils.scraper_vehiculo",
+        "documentation": {}
+    },
+    {
         "label": "jwt",
         "kind": 6,
         "isExtraImport": true,
@@ -160,6 +168,14 @@
         "description": "flask_bcrypt",
         "isExtraImport": true,
         "detail": "flask_bcrypt",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
         "documentation": {}
     },
     {
@@ -294,6 +310,14 @@
         "documentation": {}
     },
     {
+        "label": "async_playwright",
+        "importPath": "playwright.async_api",
+        "description": "playwright.async_api",
+        "isExtraImport": true,
+        "detail": "playwright.async_api",
+        "documentation": {}
+    },
+    {
         "label": "json",
         "kind": 6,
         "isExtraImport": true,
@@ -316,6 +340,14 @@
         "description": "flask_limiter.util",
         "isExtraImport": true,
         "detail": "flask_limiter.util",
+        "documentation": {}
+    },
+    {
+        "label": "Cache",
+        "importPath": "flask_caching",
+        "description": "flask_caching",
+        "isExtraImport": true,
+        "detail": "flask_caching",
         "documentation": {}
     },
     {
@@ -398,6 +430,15 @@
         "importPath": "services.scraper_routes",
         "description": "services.scraper_routes",
         "peekOfCode": "def buscar_cedula():\n    \"\"\"\n    Búsqueda de cédula por nombre.\n    Datos esperados:\n    {\n        \"nombre\": \"Juan Pérez González\"\n    }\n    Respuesta exitosa:\n    {\n        \"api_url\": \"https://srienlinea.sri.gob.ec/...\",",
+        "detail": "services.scraper_routes",
+        "documentation": {}
+    },
+    {
+        "label": "buscar_vehiculo",
+        "kind": 2,
+        "importPath": "services.scraper_routes",
+        "description": "services.scraper_routes",
+        "peekOfCode": "def buscar_vehiculo():\n    \"\"\"\n    Búsqueda de información de vehículo por placa.\n    Datos esperados:\n    {\n        \"placa\": \"PSE0881\"\n    }\n    Respuesta exitosa:\n    {\n        \"api_url\": \"https://servicios.axiscloud.ec/...\",",
         "detail": "services.scraper_routes",
         "documentation": {}
     },
@@ -505,7 +546,16 @@
         "kind": 2,
         "importPath": "user.routes",
         "description": "user.routes",
-        "peekOfCode": "def get_limiter():\n    from app import limiter\n    return limiter\n\"\"\"\nRuta raíz que redirige a login o home según si está autenticado.\n\"\"\"\n@user_bp.route('/', methods=['GET'])\ndef index():\n    # La redirección se maneja en JavaScript del cliente según el token en localStorage\n    return redirect(url_for('user.home'))",
+        "peekOfCode": "def get_limiter():\n    from app import limiter\n    return limiter\ndef get_cache():\n    from app import cache\n    return cache\n\"\"\"\nRuta raíz que redirige a login o home según si está autenticado.\n\"\"\"\n@user_bp.route('/', methods=['GET'])",
+        "detail": "user.routes",
+        "documentation": {}
+    },
+    {
+        "label": "get_cache",
+        "kind": 2,
+        "importPath": "user.routes",
+        "description": "user.routes",
+        "peekOfCode": "def get_cache():\n    from app import cache\n    return cache\n\"\"\"\nRuta raíz que redirige a login o home según si está autenticado.\n\"\"\"\n@user_bp.route('/', methods=['GET'])\ndef index():\n    # La redirección se maneja en JavaScript del cliente según el token en localStorage\n    return redirect(url_for('user.home'))",
         "detail": "user.routes",
         "documentation": {}
     },
@@ -604,7 +654,7 @@
         "kind": 5,
         "importPath": "user.routes",
         "description": "user.routes",
-        "peekOfCode": "user_bp = Blueprint('user', __name__)\n# Importar limiter desde app\ndef get_limiter():\n    from app import limiter\n    return limiter\n\"\"\"\nRuta raíz que redirige a login o home según si está autenticado.\n\"\"\"\n@user_bp.route('/', methods=['GET'])\ndef index():",
+        "peekOfCode": "user_bp = Blueprint('user', __name__)\n# Importar limiter y cache desde app\ndef get_limiter():\n    from app import limiter\n    return limiter\ndef get_cache():\n    from app import cache\n    return cache\n\"\"\"\nRuta raíz que redirige a login o home según si está autenticado.",
         "detail": "user.routes",
         "documentation": {}
     },
@@ -816,6 +866,15 @@
         "documentation": {}
     },
     {
+        "label": "VehiculoScraper",
+        "kind": 6,
+        "importPath": "utils.scraper_vehiculo",
+        "description": "utils.scraper_vehiculo",
+        "peekOfCode": "class VehiculoScraper:\n    \"\"\"Scraper para la página de consulta de vehículos del Registro Civil de Ecuador.\"\"\"\n    def __init__(self):\n        self.url = \"https://servicios.axiscloud.ec/CRV/?ps_empresa=05\"\n        self.results = []\n    async def scrape_cedula(self, placa):\n        \"\"\"\n        Scrapea la información de un vehículo por su placa.\n        Args:\n            placa: Placa del vehículo (ej: PSE0881)",
+        "detail": "utils.scraper_vehiculo",
+        "documentation": {}
+    },
+    {
         "label": "create_app",
         "kind": 2,
         "importPath": "app",
@@ -829,7 +888,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "jwt = JWTManager()\nmail = Mail()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\"\n)\ndef create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config",
+        "peekOfCode": "jwt = JWTManager()\nmail = Mail()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\"\n)\ncache = Cache(config={'CACHE_TYPE': 'simple'})\ndef create_app():\n    app = Flask(__name__)",
         "detail": "app",
         "documentation": {}
     },
@@ -838,7 +897,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "mail = Mail()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\"\n)\ndef create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config\n    app.config.from_object(Config)",
+        "peekOfCode": "mail = Mail()\nlimiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\"\n)\ncache = Cache(config={'CACHE_TYPE': 'simple'})\ndef create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config",
         "detail": "app",
         "documentation": {}
     },
@@ -847,7 +906,16 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "limiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\"\n)\ndef create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config\n    app.config.from_object(Config)\n    # Registro del blueprint de rutas de usuario",
+        "peekOfCode": "limiter = Limiter(\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"],\n    storage_uri=\"memory://\"\n)\ncache = Cache(config={'CACHE_TYPE': 'simple'})\ndef create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config\n    app.config.from_object(Config)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "cache",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "cache = Cache(config={'CACHE_TYPE': 'simple'})\ndef create_app():\n    app = Flask(__name__)\n    # Configuración de la aplicación Flask utilizando la clase Config\n    app.config.from_object(Config)\n    # Registro del blueprint de rutas de usuario\n    app.register_blueprint(user_bp)\n    # Registro del blueprint de servicios\n    app.register_blueprint(services_bp)\n    # Inicialización de la base de datos y JWT",
         "detail": "app",
         "documentation": {}
     },
